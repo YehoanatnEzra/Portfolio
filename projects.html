@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects — Yehonatan Ezra</title>
+  <meta name="description" content="All projects by Yehonatan Ezra: short descriptions and source code links." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='80'>📁</text></svg>">
+  <style>
+    :root { --bg:#0b0c10; --panel:#12141a; --text:#e8ebf1; --muted:#a7b0c0; --accent:#06b6d4; --accent-2:#8b5cf6; --shadow:0 10px 25px rgba(0,0,0,.25); --radius:16px; --container:1100px; }
+    *{box-sizing:border-box} body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:var(--bg); color:var(--text)}
+    a{color:inherit; text-decoration:none}
+    .container{ width:min(100% - 32px, var(--container)); margin-inline:auto; }
+    header{ position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:color-mix(in oklab, var(--bg), transparent 40%); border-bottom:1px solid color-mix(in oklab, var(--text), transparent 88%); }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+    .brand{ font-weight:800; letter-spacing:.3px }
+    .nav-links{ display:flex; gap:16px; align-items:center }
+    .btn{ padding:8px 14px; border-radius:999px; background:var(--text); color:var(--bg); font-weight:600; border:none; cursor:pointer }
+
+    main{ padding: 28px 0 48px; }
+    .toolbar{ display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:18px; }
+    .search{ flex:1 1 280px; display:flex; align-items:center; gap:8px; background:var(--panel); border:1px solid color-mix(in oklab, var(--text), transparent 90%); padding:10px 12px; border-radius:12px; }
+    .search input{ flex:1; border:none; outline:none; background:transparent; color:var(--text); font-size:14px }
+    .filters{ display:flex; gap:8px; flex-wrap:wrap }
+    .chip{ padding:8px 12px; border-radius:999px; border:1px solid color-mix(in oklab, var(--text), transparent 85%); background:var(--panel); cursor:pointer; user-select:none }
+    .chip.active{ background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; border-color:transparent }
+
+    .grid{ display:grid; gap:16px; grid-template-columns:repeat(12,1fr) }
+    .card{ grid-column:span 12; display:grid; grid-template-columns:1fr 1.2fr; background:var(--panel); border:1px solid color-mix(in oklab, var(--text), transparent 90%); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); min-height:160px }
+    .card .thumb{ background: linear-gradient(135deg, color-mix(in oklab, var(--accent-2), transparent 70%), transparent), linear-gradient(180deg, color-mix(in oklab, var(--accent), transparent 70%), transparent); }
+    .card .content{ padding:16px }
+    .badge{ display:inline-flex; gap:6px; align-items:center; background: color-mix(in oklab, var(--accent), transparent 80%); color: color-mix(in oklab, var(--accent), black 45%); padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700 }
+    .actions{ display:flex; gap:10px; margin-top:10px }
+    .btn-secondary{ padding:10px 14px; border-radius:12px; border:1px solid color-mix(in oklab, var(--text), transparent 80%); background:transparent; color:var(--text); cursor:pointer }
+
+    .empty{ text-align:center; color:var(--muted); padding:32px; border:1px dashed color-mix(in oklab, var(--text), transparent 85%); border-radius:12px }
+    footer{ padding:36px 0; color:var(--muted); text-align:center }
+    @media (max-width: 900px){ .card{ grid-template-columns:1fr } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="index.html">← Back • Yehonatan Ezra</a>
+      <nav class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="projects.html" aria-current="page">Projects</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>All Projects</h1>
+    <p class="muted">Use the search and the language filters to explore my work.</p>
+
+    <div class="toolbar">
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/></svg>
+        <input id="search" type="search" placeholder="Search projects by name or description…" autocomplete="off" />
+      </div>
+      <div class="filters" id="filters"></div>
+    </div>
+
+    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="empty" class="empty" hidden>No projects match your filters yet.</div>
+  </main>
+
+  <footer>© <span id="year"></span> Yehonatan Ezra • Projects</footer>
+
+  <script>
+    // Theme default: dark
+    const html = document.documentElement;
+    html.setAttribute('data-theme','dark');
+
+    // ----- Project data (edit here) -----
+    const PROJECTS = [
+      { title: 'Secure VPN / Secure Channel',
+        tags: ['Python'],
+        description: 'Secure messaging/VPN protocol with ECDH, KDF, AES‑CBC, HMAC‑SHA256, and anti‑replay nonce (with MITM simulator).',
+        code: 'https://github.com/YehoanatnEzra/Secure_VPN' },
+
+      { title: 'User‑Level Thread Library',
+        tags: ['C++'],
+        description: 'A user‑level threads library with a TCB (thread control block) abstraction and scheduler primitives for create/terminate/yield.',
+        code: 'https://github.com/YehoanatnEzra/System_Level_Projects/tree/main/User-Level%20Thread%20Management%20Library' },
+
+      { title: 'Multi‑threaded MapReduce Framework',
+        tags: ['C++'],
+        description: 'MapReduce framework that parallelizes Map and Reduce phases across threads with synchronization and work queues.',
+        code: 'https://github.com/YehoanatnEzra/System_Level_Projects/tree/main/Multi-threaded%20MapReduce%20framework' },
+
+      { title: 'Job Scanner',
+        tags: ['Python'],
+        description: 'Parallel job scraper that queries multiple APIs, filters by keywords/location, caches duplicates, and exports CSV.',
+        code: 'https://github.com/YehoanatnEzra/Job_Scanner' },
+
+      { title: 'System Monitor',
+        tags: ['Python','Bash'],
+        description: 'Monitors CPU/memory/disk and auto‑logs via a GitHub Actions workflow (cron‑like).',
+        code: 'https://github.com/YehoanatnEzra/System_Monitor' },
+
+      { title: 'Nand2Tetris — From Gates to OS',
+        tags: ['Java'],
+        description: 'Full Nand2Tetris track: HDL chips, assembler, VM translator, and a simple compiler/OS components.',
+        code: 'https://github.com/YehoanatnEzra/Nand2Tetris' },
+
+      { title: 'OOP Course Projects (HUJI)',
+        tags: ['Java'],
+        description: 'Tic‑Tac‑Toe AI tournament, BrickBreaker, ASCII art generator and a 2D game — focusing on OOP & design patterns.',
+        code: 'https://github.com/YehoanatnEzra/Oop-Huji' },
+
+      { title: 'Cancer Attributes Prediction',
+        tags: ['Python'],
+        description: 'ML pipeline predicting cancer risk/subtypes/metastasis with preprocessing, multi‑stage models and a report.',
+        code: 'https://github.com/YehoanatnEzra/Cancer_Attributes_Prediction' },
+
+      { title: 'Evolution of Color Naming Systems',
+        tags: ['Python'],
+        description: 'Simulation of evolving color naming via the information bottleneck and replicator dynamics.',
+        code: 'https://github.com/YehoanatnEzra/Evolution_of_Color_Naming_Systems' },
+
+      { title: 'Needle WhatsApp Crawler (fork)',
+        tags: ['Python','JavaScript'],
+        description: 'Data collection & analysis pipeline for WhatsApp groups (fork).',
+        code: 'https://github.com/YehoanatnEzra/NeedleWhatsappCrawler' }
+    ];
+
+    // ----- Language filter chips (only 4) -----
+    const LANGUAGE_TAGS = ['Python','Java','Bash','C++'];
+    const filtersEl = document.getElementById('filters');
+    const active = new Set();
+
+    function makeChip(tag){
+      const b = document.createElement('button');
+      b.className = 'chip'; b.type = 'button'; b.textContent = tag;
+      b.onclick = () => { b.classList.toggle('active'); active.has(tag) ? active.delete(tag) : active.add(tag); render(); };
+      return b;
+    }
+    LANGUAGE_TAGS.forEach(t => filtersEl.appendChild(makeChip(t)));
+
+    // ----- Render grid with search + language filter -----
+    const grid = document.getElementById('grid');
+    const empty = document.getElementById('empty');
+    const q = document.getElementById('search');
+
+    function matches(p){
+      const text = (q.value || '').toLowerCase().trim();
+      const txt = !text || (p.title + ' ' + p.description).toLowerCase().includes(text);
+      const lang = active.size === 0 || [...active].some(tag => p.tags.includes(tag));
+      return txt && lang;
+    }
+
+    function card(p){
+      const el = document.createElement('article'); el.className = 'card';
+      el.innerHTML = `
+        <div class="content">
+          <span class="badge">${p.tags.join(' • ')}</span>
+          <h3>${p.title}</h3>
+          <p>${p.description}</p>
+          <div class="actions">
+            <a class="btn-secondary" href="${p.code}" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+        <div class="thumb"></div>`;
+      return el;
+    }
+
+    function render(){
+      grid.innerHTML = '';
+      const items = PROJECTS.filter(matches);
+      items.forEach(p => grid.appendChild(card(p)));
+      empty.hidden = items.length > 0;
+    }
+
+    // initial
+    document.getElementById('year').textContent = new Date().getFullYear();
+    q.addEventListener('input', render);
+    render();
+  </script>
+</body>
+</html>
