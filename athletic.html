@@ -10,80 +10,206 @@
     *{box-sizing:border-box}
     body{margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:var(--bg); color:var(--text)}
     a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
     .container{ width:min(100% - 32px, var(--container)); margin-inline:auto; }
+
+    /* Header */
     header{ position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:color-mix(in oklab, var(--bg), transparent 40%); border-bottom:1px solid color-mix(in oklab, var(--text), transparent 88%); }
     .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
     .brand{font-weight:800}
+    .nav-links a{opacity:.9; margin-left:14px}
+    .nav-links a:hover{opacity:1}
 
-    main{ padding:28px 0 48px; }
-    h1{margin:8px 0 12px}
+    main{ padding:0 0 48px; }
+    h1,h2{margin:0 0 8px}
     .muted{color:var(--muted)}
-    .lead{font-size:18px; color:var(--muted)}
 
-    .hero{ position:relative; border-radius:var(--radius); overflow:hidden; margin:18px 0 24px; }
-    .hero::before{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));}
-    .hero-img{ position:absolute; inset:0; background:url('assets/track-hero.jpg') center/cover no-repeat; filter:brightness(.9); }
-    .hero-inner{ position:relative; padding:46px 18px; }
+    /* ===== HERO ===== */
+    .hero-wrap{ position:relative; height:90vh; min-height:560px; overflow:hidden; }
+    .hero-slides{ position:absolute; inset:0 }
+    .hero-slide{ position:absolute; inset:0; background:center/cover no-repeat; opacity:0; transition:opacity 1s ease; filter:brightness(.9) }
+    .hero-slide.active{ opacity:1 }
+    .hero-overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.4), rgba(0,0,0,.3) 40%, rgba(0,0,0,.5)); pointer-events:none }
 
-    .grid{ display:grid; gap:16px; grid-template-columns:repeat(12,1fr); }
-    .card{ grid-column:span 12; display:grid; grid-template-columns: 1fr 1fr; background:var(--panel); border:1px solid color-mix(in oklab, var(--text), transparent 90%); box-shadow:var(--shadow); border-radius:var(--radius); overflow:hidden; }
-    .card .content{ padding:16px }
-    .card .thumb{ background:#0f1115 center/cover no-repeat; min-height:220px }
-    @media (max-width: 900px){ .card{ grid-template-columns:1fr } }
+    .hero-inner{
+      position:relative; z-index:2; height:100%;
+      display:flex; align-items:flex-end; justify-content:center;
+      padding:28px 18px; padding-bottom:8vh;
+      text-align:left;
+    }
+    .hero-inner .about{ max-width:780px; }
+    .hero-inner .about p{ margin:0; text-indent:0; line-height:1.45; }
+
+    .dots{ position:absolute; left:50%; transform:translateX(-50%); bottom:16px; display:flex; gap:8px; z-index:3 }
+    .dot{ width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,.6); border:none; cursor:pointer }
+    .dot.active{ background:#fff }
+
+    /* ===== TEAM ===== */
+    .team-section{ position:relative; height:90vh; min-height:560px; overflow:hidden; margin-top:22px }
+    .team-bg{ position:absolute; inset:0 }
+    .team-bg .frame{ position:absolute; inset:0; background:center/cover no-repeat; opacity:0; transition:opacity 1s ease; filter:brightness(.88) }
+    .team-bg .frame.active{ opacity:1 }
+    .team-overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.45)); }
+    .team-inner{
+      position:relative; z-index:2; height:100%;
+      display:flex; align-items:flex-end; justify-content:center;
+      padding:28px 18px; padding-bottom:8vh;
+      text-align:left;
+    }
+    .team-inner .about{ max-width:780px; }
+    .team-inner .about p{ margin:0; text-indent:0; line-height:1.45; }
+
+    /* ===== PRs ===== */
+    .prs{ margin-top:22px }
+    .prs .panel{ background:var(--panel); border:1px solid color-mix(in oklab, var(--text), transparent 90%); box-shadow:var(--shadow); border-radius:var(--radius); padding:18px }
+    .prs-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); }
+    .pr{ padding:12px; border:1px solid color-mix(in oklab, var(--text), transparent 85%); border-radius:12px; text-align:center }
 
     footer{ padding:36px 0; color:var(--muted); text-align:center }
+
+    /* ===== White text & shadows ===== */
+    .hero-inner .about h1,
+    .hero-inner .about p,
+    .team-inner .about h2,
+    .team-inner .about p { color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.35); }
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
-      <a class="brand" href="index.html">← Back • Yehonatan Ezra</a>
+      <a class="brand" href="homepage.html">← Back • Yehonatan Ezra</a>
       <nav class="nav-links">
         <a href="projects.html">Projects</a>
-        <a href="index.html#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-img"></div>
-      <div class="hero-inner">
-        <h1>Athletics</h1>
-        <p class="lead">Middle‑distance runner and head coach of the university team. Balancing rigorous training with CS studies taught me consistency, focus, and resilience — the same traits I bring to engineering work.</p>
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero-wrap" aria-label="Hero slideshow">
+      <div class="hero-slides" data-carousel="hero">
+        <div class="hero-slide active" style="background-image:url('photos/athletic3.jpg'); background-position:center 20%;"></div>
+        <div class="hero-slide" style="background-image:url('photos/athletic5.jpg')"></div>
+        <div class="hero-slide" style="background-image:url('photos/athletic1.jpg')"></div>
+        <div class="hero-slide" style="background-image:url('photos/athletic8.jpg')"></div>
+        <div class="hero-slide" style="background-image:url('photos/athletic6.jpg'); background-position:center 30%;"></div>
+        <div class="hero-slide" style="background-image:url('photos/athletic7.jpg')"></div>
       </div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-inner container">
+        <div class="about">
+          <h1 style="font-size:46px; line-height:1.1; margin-bottom:12px">
+            Competitive runner 
+          </h1>
+          <p style="font-size:18px">
+            As a competitive runner, I compete in national and international events. <br>
+            Represented UBC at the Canadian Cross Country Championships 2024 as part of the winning team. <br>
+            Also earned a bronze medal at the Israeli 5K Road Championships in 2025. <br>
+            During last semester I also took part in a high-altitude training camp in Iten, Kenya. <br>
+            
+        
+          </p>
+        </div>
+      </div>
+
+      <div class="dots" data-dots="hero"></div>
     </section>
 
-    <section>
-      <div class="grid">
-        <article class="card">
-          <div class="content">
-            <h3>Coaching</h3>
-            <p class="muted">Head coach of the HUJI track team — planning periodization, leading workouts, race preparation, and team culture. Working with athletes from 800m to 10K.</p>
-          </div>
-          <div class="thumb" style="background-image:url('assets/coach.jpg')"></div>
-        </article>
+    <!-- ===== TEAM (full background like hero) ===== -->
+    <section class="team-section" aria-label="University team">
+      <div class="team-bg" data-carousel="team">
+        <div class="frame active" style="background-image:url('photos/Huji1.jpg'); background-position:center 90%;"></div>
+        <div class="frame " style="background-image:url('photos/Huji2.jpg')"></div>
+        <div class="frame " style="background-image:url('photos/Huji4.jpg'); background-position:top;"></div>
+      </div>
+      <div class="team-overlay"></div>
 
-        <article class="card">
-          <div class="content">
-            <h3>Racing</h3>
-            <p class="muted">Competed in national and university meets, including XC championships and track races (800m–5K). Highlights include team podiums and PRs across distances.</p>
-          </div>
-          <div class="thumb" style="background-image:url('assets/race1.jpg')"></div>
-        </article>
+      <div class="team-inner container">
+        <div class="about">
+          <h2 style="font-size:42px; margin-bottom:12px">University Running Team</h2>
+          <p style="font-size:18px">
+            I founded and coach the HUJI running team together with Elad Maman,  
+            building a strong group culture and guiding athletes through all aspects of performance. <br>
+            Our philosophy combines academic discipline with professional training, focusing on both individual improvement and team achievements. <br>
+            The squad competes in road and track races, and has collected several medals at the ASA Games. <br>
+            <span style="font-weight:bold; font-size:17px; color:#ffd700">
+              Free participation for students - for more details: 054-6374390
+            </span>
+          </p>
+          </p>
+        </div>
+      </div>
 
-        <article class="card">
-          <div class="content">
-            <h3>Training Abroad</h3>
-            <p class="muted">Exchange semester at UBC (Vancouver, Canada) — trained with local clubs and learned from international coaching approaches.</p>
-          </div>
-          <div class="thumb" style="background-image:url('assets/ubc-track.jpg')"></div>
-        </article>
+      <div class="dots" data-dots="team" style="bottom:14px"></div>
+    </section>
+
+    <!-- ===== PRs ===== -->
+    <section class="records" style="position:relative;">
+      <div class="records-bg" style="
+        background-image:url('photos/PB.jpg');
+        background-size:cover;
+        background-position:center;
+        position:absolute;
+        top:0; left:0;
+        width:100%; height:100%;
+        z-index:0;
+        filter: brightness(0.4); /* כהות כדי שהטקסט יהיה קריא */
+      "></div>
+    
+      <div class="records-inner container" style="position:relative; z-index:1; color:#fff; text-align:center; padding:80px 20px;">
+        <h2 style="font-size:36px; margin-bottom:20px;">Personal Records</h2>
+        <ul style="list-style:none; padding:0; font-size:20px; line-height:1.8;">
+          <li>1500m – 4:11</li>
+          <li>3000m – 9:08</li>
+          <li>5000m – 15:45</li>
+          <li>10km – 32:44</li>
+        </ul>
       </div>
     </section>
+    
   </main>
 
-  <footer>© <span id="year"></span> Yehonatan Ezra • Athletics</footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function initCarousel(wrapperAttr, intervalMs=5000){
+      const wrap = document.querySelector(`[data-carousel="${wrapperAttr}"]`);
+      if(!wrap) return;
+      const slides = Array.from(wrap.children);
+      const dotsWrap = document.querySelector(`[data-dots="${wrapperAttr}"]`);
+      let i = 0, t = null;
+
+      function go(n){
+        slides[i].classList.remove('active');
+        i = (n + slides.length) % slides.length;
+        slides[i].classList.add('active');
+        if(dotsWrap){
+          dotsWrap.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active', j===i));
+        }
+      }
+      function next(){ go(i+1) }
+      function reset(){ if(t) clearInterval(t); t = setInterval(next, intervalMs) }
+
+      if(dotsWrap){
+        slides.forEach((_,idx)=>{
+          const b = document.createElement('button');
+          b.className = 'dot' + (idx===0?' active':'');
+          b.setAttribute('aria-label', `Go to slide ${idx+1}`);
+          b.onclick = ()=>{ go(idx); reset(); };
+          dotsWrap.appendChild(b);
+        });
+      }
+
+      reset();
+      wrap.addEventListener('mouseenter', ()=>t && clearInterval(t));
+      wrap.addEventListener('mouseleave', reset);
+    }
+
+    initCarousel('hero', 5000);
+    initCarousel('team', 6000);
+  </script>
 </body>
 </html>
