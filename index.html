@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yehonatan Ezra — Portfolio</title>
+  <meta name="description" content="Personal portfolio — projects, skills, and contact" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='80'>💼</text></svg>">
+
+  <style>
+    /* =============================================
+       GLOBAL DESIGN TOKENS (edit these first)
+       ============================================= */
+    :root {
+      --bg: #0b0c10;
+      --panel: #12141a;
+      --text: #e8ebf1;
+      --muted: #a7b0c0;
+      --accent: #06b6d4;
+      --accent-2: #8b5cf6;
+      --ring: #06b6d455;
+      --shadow: 0 10px 25px rgba(0,0,0,.25);
+      --radius: 18px;
+      --container: 1100px;
+    }
+    /* Light mode tokens, applied when html[data-theme="light"] */
+    html[data-theme="light"] {
+      --bg: #f6f7fb;
+      --panel: #ffffff;
+      --text: #0b1324;
+      --muted: #4b5563;
+      --accent: #06b6d4;
+      --accent-2: #8b5cf6;
+      --ring: #06b6d455;
+      --shadow: 0 10px 25px rgba(2,6,23,.08);
+    }
+
+    /* =============================================
+       BASIC RESETS & LAYOUT HELPERS
+       ============================================= */
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+
+    body {
+      /* Global background image for the whole page. Replace the path as needed. */
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Segoe UI Emoji";
+      background: url('photos/background1.jpg') center top / cover no-repeat fixed;
+      color: #fff; /* default light text for contrast against the photo */
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* Constrains content horizontally */
+    .container { width: min(100% - 32px, var(--container)); margin-inline: auto; }
+
+    /* =============================================
+       HEADER & NAVIGATION (sticky, blurred over bg)
+       ============================================= */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: color-mix(in oklab, #000, transparent 60%);
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      color: #fff;
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+    .brand { font-weight: 800; letter-spacing: .5px; }
+    .nav a { opacity: .95; }
+    .nav-links { display: flex; gap: 18px; align-items: center; }
+    .btn { padding: 8px 14px; border-radius: 999px; background: #fff; color: #111; font-weight: 600; border: none; cursor: pointer; }
+    .nav-links .icon { width: 16px; height: 16px; }
+    .nav-links a { display: flex; align-items: center; gap: 6px; }
+
+    /* =============================================
+       HERO SECTION (photo stays behind; content on top)
+       ============================================= */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      color: #fff;
+      text-align: left;
+      overflow: hidden;
+    }
+    /* Subtle dark overlay for readability; does not change the image itself */
+    .hero::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.25) 40%, rgba(0,0,0,.15));
+      z-index: 0;
+    }
+    .hero .inner { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 40px; max-width: 1100px; padding: 80px 40px 40px; }
+
+    /* Round avatar next to the title */
+    .headline-title { display: flex; align-items: center; gap: 12px; }
+    .headline-title img {
+      width: 64px; height: 64px; border-radius: 50%; object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0,0,0,.35);
+    }
+
+    .headline h1 { font-size: clamp(42px, 6vw, 72px); margin: 0 0 12px; text-shadow: 0 3px 18px rgba(0,0,0,.55); }
+    .headline p  { margin: 0 0 20px; font-size: 22px; color: #eef2f7; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+
+    /* About block under the headline */
+    .about { margin-top: 20px; }
+    .about h2 { font-size: 28px; margin: 0 0 12px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+    .about p  { font-size: 18px; line-height: 1.75; margin: 0 0 1.8em; max-width: 760px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+
+    /* Tiny photo credit label on the hero */
+    .bg-credit {
+      position: absolute; top: 20px; left: 20px;
+      font-size: 12px; color: rgba(255,255,255,0.8); font-style: italic; z-index: 10;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+
+    /* =============================================
+       GENERIC SECTIONS & PANELS (transparent, over photo)
+       ============================================= */
+    main { background: none; }
+    section { padding: 48px 0; position: relative; z-index: 1; background: none; }
+    .section-title { font-size: 22px; margin: 0 0 12px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+    .panel { background: none; border: none; box-shadow: none; color: #fff; }
+
+    /* =============================================
+       QUICK LINKS (reusable card style)
+       ============================================= */
+    .quick { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .qcard {
+      grid-column: span 4;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 16px; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.3);
+      background: rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,.2);
+      color: #fff;
+    }
+    .qcard h3 { margin: 0; font-size: 18px; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+    .qcard p  { margin: 6px 0 0; font-size: 14px; color: #d1d5db; line-height: 1.5; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+    .qcard .go { padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.15); color: #fff; font-weight: 700; border: 1px solid rgba(255,255,255,.25); backdrop-filter: blur(5px); }
+
+    /* =============================================
+       TAG CHIPS (small rounded pills)
+       ============================================= */
+    .chips { display: flex; gap: 10px; flex-wrap: wrap; }
+    .chip  { padding: 10px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,.3); background: rgba(0,0,0,.25); color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.7); backdrop-filter: blur(8px); transition: all .3s ease; }
+    .chip:hover { background: rgba(0,0,0,.35); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,.3); }
+
+    /* =============================================
+       RESUME BLOCKS
+       ============================================= */
+    .resume-content { max-width: 800px; }
+    .resume-section { margin-bottom: 32px; }
+    .resume-section h3 { font-size: 24px; margin: 0 0 16px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.7); border-bottom: 2px solid rgba(255,255,255,.3); padding-bottom: 8px; }
+    .resume-item { margin-bottom: 20px; padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.2); backdrop-filter: blur(8px); }
+    .resume-item h4 { font-size: 20px; margin: 0 0 8px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+    .resume-details { font-size: 16px; margin: 0 0 8px; color: #eef2f7; font-weight: 600; opacity: .9; }
+    .resume-item p { margin: 0; color: #eef2f7; line-height: 1.6; }
+    .resume-actions { text-align: center; margin-top: 32px; }
+    .resume-btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 24px; border-radius: 12px; background: rgba(255,255,255,.15); color: #fff; font-weight: 600; border: 2px solid rgba(255,255,255,.3); backdrop-filter: blur(8px); transition: all .3s ease; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+    .resume-btn:hover { background: rgba(255,255,255,.25); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.4); }
+
+    /* =============================================
+       FOOTER
+       ============================================= */
+    footer { padding: 40px 0; color: #fff; text-align: center; background: rgba(0,0,0,.45); }
+
+    /* =============================================
+       SKILLS CAROUSEL (horizontal scroll + arrows)
+       ============================================= */
+    #skills { padding: 48px 0; }
+    #skills .section-title { font-size: 22px; margin: 0 0 14px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+
+    .scroll-wrap { position: relative; }
+    .skill-track {
+      display: flex; gap: 16px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; padding-bottom: 10px; -webkit-overflow-scrolling: touch;
+    }
+    .skill-track::-webkit-scrollbar { height: 8px; }
+    .skill-track::-webkit-scrollbar-thumb { background: rgba(255,255,255,.25); border-radius: 999px; }
+    .skill-track { scrollbar-color: rgba(255,255,255,.25) transparent; }
+
+    .skill-card {
+      scroll-snap-align: start;
+      min-width: 360px; max-width: 420px;
+      border-radius: 16px; border: 1px solid rgba(255,255,255,.3);
+      background: rgba(0,0,0,.25); backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,.2);
+      color: #fff; padding: 18px 18px 14px;
+    }
+    .skill-card h3 { margin: 0 0 10px; font-size: 18px; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
+    .skill-card ul { margin: 0; padding-left: 18px; }
+    .skill-card li { line-height: 1.55; color: #eef2f7; }
+
+    /* Carousel arrows */
+    .scroll-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35);
+      background: rgba(0,0,0,.35); color: #fff; display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(8px);
+    }
+    .scroll-btn:hover { background: rgba(0,0,0,.5); }
+    .scroll-btn.left { left: -6px; }
+    .scroll-btn.right { right: -6px; }
+
+    /* =============================================
+       RESPONSIVE TWEAKS
+       ============================================= */
+    @media (max-width: 980px) {
+      .hero .inner { flex-direction: column; text-align: center; align-items: center; }
+      .qcard { grid-column: span 12; }
+      .headline-title img { width: 70px; height: 70px; }
+    }
+
+    @media (max-width: 640px) {
+      .skill-card { min-width: 280px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- =====================================================
+       HEADER: contact links + social + theme toggle
+       ===================================================== -->
+  <header>
+    <div class="container nav">
+     
+      <nav class="nav-links">
+        <a href="tel:0546473490">(+972) 054-647-3490</a>
+        <a href="mailto:yonzra12@gmail.com">yonzra12@gmail.com</a>
+
+        <!-- LinkedIn icon link -->
+        <a href="https://www.linkedin.com/in/yehonatanezra/" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.8 53.8 0 01107.6 0c0 29.7-24.1 54.3-53.81 54.3zM447.9 448h-92.4V306.4c0-33.7-12.1-56.7-42.3-56.7-23.1 0-36.9 15.5-43 30.4-2.2 5.2-2.8 12.4-2.8 19.6V448h-92.5s1.2-269.7 0-297.1h92.5v42.1c12.3-19 34.2-46.2 83.6-46.2 61 0 106.9 39.8 106.9 125.2V448z"/></svg>
+          LinkedIn
+        </a>
+
+        <!-- GitHub icon link -->
+        <a href="https://github.com/YehoanatnEzra" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="icon"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.6 .3-5.2-1.3-5.2-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.2 1.3 5.2 3.6zm-31.1-6.5c-.7 2 .7 4.3 3.6 5.2 2.6 .7 5.9-.7 6.5-2.6.7-2-.7-4.3-3.6-5.2-2.6-.7-5.9 .7-6.5 2.6zm44.2-1.3c-2.9 .7-4.6 2.9-3.9 5.2.7 2.3 3.9 3.6 6.8 2.9 2.9-.7 4.6-2.9 3.9-5.2-.7-2.3-3.9-3.6-6.8-2.9zm92.5-290.6c-112.5 0-204 91.5-204 204 0 90.2 58.5 166.8 139.5 194 10.2 1.6 13.9-4.3 13.9-9.7v-34.7c-56.7 12.3-68.6-27.5-68.6-27.5-9.1-23-22.3-29.1-22.3-29.1-18.2-12.6 1.3-12.3 1.3-12.3 20.2 1.3 30.9 20.9 30.9 20.9 17.8 30.6 46.6 21.8 58 16.6 1.6-12.9 7-21.8 12.9-26.9-45.2-5.2-92.8-22.6-92.8-100.5 0-22.3 7.8-40.9 20.6-55.2-2-5.2-9-25.9 2-54.1 0 0 17.2-5.5 56.2 21.2a196.5 196.5 0 01102.4 0c39-26.7 56.2-21.2 56.2-21.2 11 28.2 4.2 48.2 2 54.1 12.9 14.3 20.6 32.9 20.6 55.2 0 78.2-47.6 95.2-92.9 100.5 7.2 6.2 13.6 18.3 13.6 37.2v55.2c0 5.5 3.9 11.6 13.9 9.7 81-27.2 139.5-103.8 139.5-194 0-112.5-91.5-204-204-204z"/></svg>
+          GitHub
+        </a>
+
+        
+      </nav>
+    </div>
+  </header>
+
+  <!-- =====================================================
+       HERO: intro + avatar + About + background credit
+       ===================================================== -->
+  <section class="hero">
+    <div class="bg-credit">These photos was taken during my exchange semester at UBC, while hiking in the Rockies.</div>
+    <div class="inner">
+      <div class="headline">
+        <div class="headline-title">
+          <!-- Update the path to your profile image -->
+          <img src="photos/profil.jpg" alt="Profile">
+          <h1>Hi, I'm Yehonatan</h1>
+        </div>
+        <p>| CS student | Software Engineer | Athlete |</p>
+
+        <!-- ABOUT: keep just one element with id="about" -->
+        <div id="about" class="about">
+          <h2>About me</h2>
+          <p>
+            I'm a Computer Science student at the Hebrew University of Jerusalem with a strong passion for both technology and athletics. Before my studies, I served as Deputy Commander of a Shaldag-class Warship in the Israeli Navy, where I gained leadership and operational experience under pressure.
+          </p>
+          <p>
+            I have a strong foundation in software engineering, AI, and systems development, and I love building products end-to-end. This year, I completed a semester at the University of British Columbia (UBC) in Vancouver, Canada, as part of a student exchange program.
+          </p>
+          <p>
+            In addition to my studies, I am a competitive long-distance & XC runner and coach. I founded the Hebrew University’s running team and continue to lead it today. As an athlete, I placed third in the 5k road Israeli National Championships 2025 and was part of the team that won the Canadian Cross Country National Championship.
+          </p>
+          <p>• Experienced with Python, C, C++, Java, Bash and more.<br>
+          • Particularly interested in low-level systems, cybersecurity, AI, and ML.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       MAIN CONTENT
+       ===================================================== -->
+  <main class="container">
+    <!-- QUICK LINKS (cards) -->
+    <section id="quick" aria-label="Quick links">
+      <div class="quick">
+        <a class="qcard" href="athletic.html">
+          <div>
+            <h3>Me as an athlete</h3>
+            <p>My journey as a middle-distance runner and coach, from founding the university’s running team to national and international achievements.</p>
+          </div>
+          <span class="go">Explore</span>
+        </a>
+
+        <a class="qcard" href="projects.html">
+          <div>
+            <h3>Explore my projects</h3>
+            <p>A collection of personal and academic projects, showcasing my passion for backend and low-level programming, cybersecurity, and machine learning.</p>
+          </div>
+          <span class="go">Explore</span>
+        </a>
+
+        <a class="qcard" href="Yehonatan_Ezra.pdf" target="_blank" rel="noopener">
+          <div>
+            <h3>My resume</h3>
+            <p>Discover my academic background, military service, and professional experience in detail.</p>
+          </div>
+          <span class="go">Download</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title">Selected Projects</h2>
+      <div class="quick">
+        <a class="qcard" href="https://github.com/YehoanatnEzra/Secure_VPN" target="_blank" rel="noopener">
+          <div>
+            <h3>Secure VPN</h3>
+            <p>
+              Engineered a secure VPN between client and server using Diffie–Hellman key exchange and AES-CBC encryption with HMAC authentication. The system mitigates man-in-the-middle, delay, and replay attacks, ensuring confidentiality, integrity, and reliable communication.
+            </p>
+          </div>
+          <span class="go">GitHub</span>
+        </a>
+
+        <a class="qcard" href="https://github.com/YehoanatnEzra/System_Level_Computing_Projects" target="_blank" rel="noopener">
+          <div>
+            <h3>User-Level Thread Library</h3>
+            <p>
+              Implemented a user-level threading library in C++ with preemptive round-robin scheduling, custom thread control blocks (TCBs), and manual context switching via <code>sigsetjmp</code>/<code>siglongjmp</code>. Supports thread creation, initialization, sleep, blocking, resuming, and safe termination - all in user space without kernel involvement.
+            </p>
+          </div>
+          <span class="go">GitHub</span>
+        </a>
+
+        <a class="qcard" href="https://github.com/YehoanatnEzra/Job_Scanner" target="_blank" rel="noopener">
+          <div>
+            <h3>Job Scanner</h3>
+            <p>
+              Built a job aggregation tool that pulls listings from multiple APIs, including a non-documented Airtable source (Goonzile). Parsed hidden URLs and dynamic headers from HTML and JavaScript to access raw data. This module is part of a broader platform that matches resumes to job descriptions and helps users tailor their applications.
+            </p>
+          </div>
+          <span class="go">GitHub</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SKILLS (horizontal carousel) -->
+    <section id="skills" aria-label="Technical Skills">
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="scroll-wrap">
+        <button class="scroll-btn left" aria-label="Scroll left">‹</button>
+        <div class="skill-track">
+          <!-- Languages -->
+          <article class="skill-card">
+            <h3>Languages</h3>
+            <ul>
+              <li>Python</li>
+              <li>C/C++</li>
+              <li>Java</li>
+              <li>Bash</li>
+              <li>SQL</li>
+              <li>HTML, CSS, JavaScript (basic)</li>
+            </ul>
+          </article>
+
+           <!-- CS Fundamentals -->
+           <article class="skill-card">
+            <h3>CS Fundamentals</h3>
+            <ul>
+              <li>Data structures, algorithms</li>
+              <li>operating systems, concurrency</li>
+              <li>OOP & design principles</li>
+              <li>Databases & SQL, basic cryptography</li>
+            </ul>
+          </article>
+
+          <!-- Network & Cybersecurity -->
+          <article class="skill-card">
+            <h3>Network & Cybersecurity</h3>
+            <ul>
+              <li>AES-128/256, ChaCha20, RSA, ECC</li>
+              <li>CBC, CTR, ECB (avoid)</li>
+              <li>DH/ECDH, RSA key transport</li>
+              <li>TLS, HTTPS, SSH, IPsec</li>
+              <li>TCP, UDP</li>
+            </ul>
+          </article>
+
+          <!-- Machine Learning -->
+          <article class="skill-card">
+            <h3>Machine Learning</h3>
+            <ul>
+              <li>scikit-learn, NumPy, pandas, matplotlib</li>
+              <li>Random Forest, AdaBoost, SVM, KNN, Logistic Regression</li>
+              <li>PCA, DBSCAN. </li>
+              <li>Data preprocessing & experiment design</li>
+            </ul>
+          </article>
+
+          <!-- Operating Systems -->
+          <article class="skill-card">
+            <h3>Operating Systems</h3>
+          <ul>
+            <li>Threads, Processes, Scheduling</li>
+            <li>Mutexes, Semaphores, Condition Variables</li>
+            <li>Kernel vs User Space, System Calls</li>
+            <li>Virtual Memory, Paging</li>
+            <li>Pipes, Sockets, Shared Memory, Signals</li>
+          </ul>
+          </article>
+
+         
+
+         
+        </div>
+        <button class="scroll-btn right" aria-label="Scroll right">›</button>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume">
+      <h2 class="section-title">Resume</h2>
+      <div class="panel">
+        <div class="resume-content">
+          <div class="resume-section">
+            <h3>Education</h3>
+            <div class="resume-item">
+              <h4>Hebrew University of Jerusalem</h4>
+              <p class="resume-details">Computer Science, BSc • 2022–present • GPA: 88</p>
+              <p>Final-year student with focus on systems programming, low-level systems, and cryptography.</p>
+            </div>
+            <div class="resume-item">
+              <h4>University of British Columbia (UBC)</h4>
+              <p class="resume-details">Exchange Semester • 2024</p>
+              <p>Computer Science exchange program in Vancouver, Canada.</p>
+            </div>
+          </div>
+
+          <div class="resume-section">
+            <h3>Experience</h3>
+            <div class="resume-item">
+              <h4>Instructor, Mamriot Cyber Program</h4>
+              <p class="resume-details">2025 – Present</p>
+              <p>Provided mentorship to high school students in computer science and cybersecurity fundamentals.</p>
+              <p>Led educational sessions and guided student projects as part of Israel’s elite national tech initiative.</p>
+            </div>
+          </div>
+
+          <div class="resume-section">
+            <h3>Military Service</h3>
+            <div class="resume-item">
+              <h4>Israeli Navy - Deputy Commander, Shaldag-class warship</h4>
+              <p class="resume-details">
+              <p>Led crew operations on a SHALDAG fast patrol boat with responsibility for real-time decision-making, safety, and mission execution. Gained hands-on leadership, teamwork, and high-pressure operational experience.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+
+ 
+  <script>
+    // Year in footer (do only if element exists)
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  
+    // Theme toggle: persists preference in localStorage
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if (saved) html.setAttribute('data-theme', saved);
+  
+    themeToggle?.addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  
+    // === Background carousel ===
+    const images = [
+      'photos/background1.jpg',
+      'photos/background2.jpg',
+      'photos/background3.jpg',
+      'photos/background4.jpg'
+    ];
+  
+    // Preload images (optional but nice)
+    images.forEach(src => { const img = new Image(); img.src = src; });
+  
+    let index = 0;
+    const body = document.body;
+  
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      body.style.background = `url('${images[index]}') center top / cover no-repeat fixed`;
+    }, 8000);
+  </script>
+  
+  
+</body>
+</html>
