@@ -45,7 +45,7 @@
       /* Global background image for the whole page. Replace the path as needed. */
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Segoe UI Emoji";
-      background: url('photos/athletic.jpg') center top / cover no-repeat fixed;
+      background: url('photos/background1.jpg') center top / cover no-repeat fixed;
       color: #fff; /* default light text for contrast against the photo */
       line-height: 1.6;
     }
@@ -226,7 +226,7 @@
        ===================================================== -->
   <header>
     <div class="container nav">
-      <a class="brand" href="#">Yehonatan Ezra</a>
+     
       <nav class="nav-links">
         <a href="tel:0546473490">(+972) 054-647-3490</a>
         <a href="mailto:yonzra12@gmail.com">yonzra12@gmail.com</a>
@@ -252,7 +252,7 @@
        HERO: intro + avatar + About + background credit
        ===================================================== -->
   <section class="hero">
-    <div class="bg-credit">This photo was taken during my exchange semester at UBC, while hiking in the Rockies.</div>
+    <div class="bg-credit">These photos was taken during my exchange semester at UBC, while hiking in the Rockies.</div>
     <div class="inner">
       <div class="headline">
         <div class="headline-title">
@@ -272,10 +272,10 @@
             I have a strong foundation in software engineering, AI, and systems development, and I love building products end-to-end. This year, I completed a semester at the University of British Columbia (UBC) in Vancouver, Canada, as part of a student exchange program.
           </p>
           <p>
-            In addition to my studies, I am an active long-distance & XC runner and coach. I founded the Hebrew University’s running team and continue to lead it today. As an athlete, I placed third in the 5k road Israeli National Championships 2025 and was part of the team that won the Canadian Cross Country National Championship.
+            In addition to my studies, I am a competitive long-distance & XC runner and coach. I founded the Hebrew University’s running team and continue to lead it today. As an athlete, I placed third in the 5k road Israeli National Championships 2025 and was part of the team that won the Canadian Cross Country National Championship.
           </p>
-          <p>• Experienced with Python, C, C++, Java, Bash and more.</p>
-          <p>• Particularly interested in low-level systems, cybersecurity, AI, and ML.</p>
+          <p>• Experienced with Python, C, C++, Java, Bash and more.<br>
+          • Particularly interested in low-level systems, cybersecurity, AI, and ML.</p>
         </div>
       </div>
     </div>
@@ -387,7 +387,7 @@
             <ul>
               <li>scikit-learn, NumPy, pandas, matplotlib</li>
               <li>Random Forest, AdaBoost, SVM, KNN, Logistic Regression</li>
-              <li>PCA, DBSCAN; evaluation & cross-validation</li>
+              <li>PCA, DBSCAN. </li>
               <li>Data preprocessing & experiment design</li>
             </ul>
           </article>
@@ -450,7 +450,7 @@
             <h3>Experience</h3>
             <div class="resume-item">
               <h4>Instructor, Mamriot Cyber Program</h4>
-              <p class="resume-details">2025–Present</p>
+              <p class="resume-details">2025 – Present</p>
               <p>Provided mentorship to high school students in computer science and cybersecurity fundamentals.</p>
               <p>Led educational sessions and guided student projects as part of Israel’s elite national tech initiative.</p>
             </div>
@@ -459,8 +459,8 @@
           <div class="resume-section">
             <h3>Military Service</h3>
             <div class="resume-item">
-              <h4>Israeli Navy — Deputy Commander, Shaldag-class warship</h4>
-              <p class="resume-details">Completed prior to studies</p>
+              <h4>Israeli Navy - Deputy Commander, Shaldag-class warship</h4>
+              <p class="resume-details">
               <p>Led crew operations on a SHALDAG fast patrol boat with responsibility for real-time decision-making, safety, and mission execution. Gained hands-on leadership, teamwork, and high-pressure operational experience.</p>
             </div>
           </div>
@@ -469,23 +469,46 @@
     </section>
   </main>
 
-  <footer>© <span id="year"></span> Yehonatan Ezra</footer>
 
+
+ 
   <script>
-    // Inject current year into the footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-
+    // Year in footer (do only if element exists)
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  
     // Theme toggle: persists preference in localStorage
     const html = document.documentElement;
     const themeToggle = document.getElementById('themeToggle');
     const saved = localStorage.getItem('theme');
     if (saved) html.setAttribute('data-theme', saved);
-
+  
     themeToggle?.addEventListener('click', () => {
-      const current = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', current);
-      localStorage.setItem('theme', current);
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
     });
+  
+    // === Background carousel ===
+    const images = [
+      'photos/background1.jpg',
+      'photos/background2.jpg',
+      'photos/background3.jpg',
+      'photos/background4.jpg'
+    ];
+  
+    // Preload images (optional but nice)
+    images.forEach(src => { const img = new Image(); img.src = src; });
+  
+    let index = 0;
+    const body = document.body;
+  
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      body.style.background = `url('${images[index]}') center top / cover no-repeat fixed`;
+    }, 8000);
   </script>
+  
+  
 </body>
 </html>
