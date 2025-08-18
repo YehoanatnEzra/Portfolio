@@ -106,8 +106,10 @@
     }
     .headline-title img:hover { transform: scale(1.03); }
 
-    .headline h1 { font-size: clamp(38px, 6vw, 72px); margin: 0 0 12px; text-shadow: 0 3px 18px rgba(0,0,0,.55); }
+    .headline h1 { font-size: clamp(38px, 6vw, 72px); margin: 0 0 6px; text-shadow: 0 3px 18px rgba(0,0,0,.55); }
     .headline p  { margin: 0 0 20px; font-size: 22px; color: #eef2f7; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+    .headline .tagline { text-align: center; }
+    .headline .tagline strong { font-weight: 700; }
 
     /* About block under the headline */
     .about { margin-top: 20px; }
@@ -302,7 +304,7 @@
           <img src="photos/profil.jpg" alt="Profile">
           <h1>Hi, I'm Yehonatan</h1>
         </div>
-        <p>| CS student | Software Engineer | Athlete |</p>
+        <p class="tagline"><strong>CS student</strong> • <strong>Software Engineer</strong> • <strong>Athlete</strong></p>
 
         <!-- ABOUT: keep just one element with id="about" -->
         <div id="about" class="about">
