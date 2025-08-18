@@ -14,11 +14,12 @@
     .container{ width:min(100% - 32px, var(--container)); margin-inline:auto; }
 
     /* Header */
-    header{ position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:color-mix(in oklab, var(--bg), transparent 40%); border-bottom:1px solid color-mix(in oklab, var(--text), transparent 88%); }
+    header{ position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); background:rgba(0,0,0,.4); background:color-mix(in srgb, var(--bg), transparent 40%); border-bottom:1px solid rgba(255,255,255,.12); border-bottom:1px solid color-mix(in srgb, var(--text), transparent 88%); }
     .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
     .brand{font-weight:800}
     .nav-links a{opacity:.9; margin-left:14px}
     .nav-links a:hover{opacity:1}
+    @media (max-width:640px){ .nav{ align-items:flex-start } .nav-links{ display:flex; flex-wrap:wrap; gap:8px 12px } }
 
     main{ padding:0 0 48px; }
     h1,h2{margin:0 0 8px}
@@ -72,12 +73,18 @@
     .hero-inner .about p,
     .team-inner .about h2,
     .team-inner .about p { color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.35); }
+
+    /* ===== Mobile typography tweaks ===== */
+    @media (max-width:640px){
+      .hero-inner .about h1{ font-size:34px !important; line-height:1.15 }
+      .team-inner .about h2{ font-size:28px !important; line-height:1.2 }
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
-      <a class="brand" href="index.html">← Back 
+      <a class="brand" href="index.html">← Back</a>
       <nav class="nav-links">
         <a href="tel:0546473490">(+972) 054-647-3490</a>
         <a href="mailto:yonzra12@gmail.com">yonzra12@gmail.com</a>
@@ -110,8 +117,7 @@
             I Represented UBC at the Canadian XC Championships 2024 as part of the winning team. <br>
             Also earned a bronze medal at the Israeli 5K Road Championships in 2025. <br>
             During last semester I also took part in a high-altitude training camp in Iten, Kenya. <br>
-            
-        
+
           </p>
         </div>
       </div>
@@ -139,7 +145,6 @@
             <span style="font-weight:bold; font-size:17px; color:#ffd700">
               Free participation for students - for more details: 054-6374390
             </span>
-          </p>
           </p>
         </div>
       </div>
