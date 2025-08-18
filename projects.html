@@ -43,10 +43,26 @@
       border:1px solid color-mix(in oklab, var(--text), transparent 90%); padding:10px 12px; border-radius:12px }
     .search input{ flex:1; border:none; outline:none; background:transparent; color:var(--text); font-size:14px }
     .filters{ display:flex; gap:8px; flex-wrap:wrap }
-    .chip{ padding:8px 12px; border-radius:999px; border:1px solid color-mix(in oklab, var(--text), transparent 85%);
-      background:var(--panel); cursor:pointer; user-select:none; transition:.2s ease }
-    .chip.active{ background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#fff; border-color:transparent }
-    .muted{ color:color-mix(in oklab, var(--text), transparent 25%); font-size: 18px; text-shadow: 0 1px 6px rgba(0,0,0,.45) }
+    .filters{ display:flex; gap:8px; flex-wrap:wrap }
+
+.chip{
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid color-mix(in oklab, var(--text), transparent 85%);
+  background:var(--panel);
+  color: var(--text);   
+  cursor:pointer;
+  user-select:none;
+  transition:.2s ease;
+}
+
+.chip.active{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff; 
+  border-color:transparent;
+}
+
+    .muted{ color:color-mix(in oklab, var(--text), transparent 40%); font-size: 18px; text-shadow: 0 1px 6px rgba(0,0,0,.45) }
 
     /* Grid / Cards */
     .grid{ display:grid; gap:16px; grid-template-columns:repeat(12,1fr) }
@@ -384,21 +400,27 @@
     ];
 
     // Filters
-    const LANGUAGE_TAGS=['Python','Java','Bash','C++'];
+    const LANGUAGE_TAGS=['Python','C++','Java','Bash'];
     const filtersEl=document.getElementById('filters');
-    const active=new Set();
+    const active = new Set(LANGUAGE_TAGS);
+
     function makeChip(tag){
-      const b=document.createElement('button');
-      b.className='chip'; b.type='button'; b.textContent=tag; b.setAttribute('aria-pressed','false');
-      b.addEventListener('click',()=>{
-        b.classList.toggle('active');
-        const on=b.classList.contains('active');
-        b.setAttribute('aria-pressed', on ? 'true':'false');
-        active.has(tag) ? active.delete(tag) : active.add(tag);
-        render();
-      });
-      return b;
-    }
+    const b=document.createElement('button');
+    b.className='chip active';
+    b.type='button';
+    b.textContent=tag;
+    b.setAttribute('aria-pressed','true');
+    b.addEventListener('click',()=>{
+      b.classList.toggle('active');
+      const on=b.classList.contains('active');
+      b.setAttribute('aria-pressed', on ? 'true':'false');
+      on ? active.add(tag) : active.delete(tag);
+      render();
+    });
+    return b;
+  }
+
+
     LANGUAGE_TAGS.forEach(t=>filtersEl.appendChild(makeChip(t)));
 
     // Rendering
