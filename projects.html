@@ -88,6 +88,9 @@
 
     @media (max-width: 980px){ .card{ grid-template-columns:1fr } }
     @media (max-width: 480px){ .card{ min-height:auto } }
+    #modal-body { white-space: pre-line; }   
+    .modal-content { max-height:80vh; overflow:auto; }
+
   </style>
 </head>
 <body>
@@ -132,7 +135,35 @@
   </main>
 
   <footer>© <span id="year"></span> Yehonatan Ezra • Projects</footer>
-
+  <div id="modal" class="modal" hidden>
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modal-title"></h2>
+      <p id="modal-body"></p>
+    </div>
+  </div>
+  
+  <style>
+  .modal {
+    position: fixed; inset:0;
+    background: rgba(0,0,0,.7);
+    display:flex; align-items:center; justify-content:center;
+    z-index:1000;
+  }
+  .modal[hidden]{ display:none }
+  .modal-content {
+    background: var(--panel);
+    color: var(--text);
+    padding: 24px;
+    border-radius: 12px;
+    max-width: 700px;
+    box-shadow: var(--shadow);
+  }
+  .close {
+    float:right; font-size: 24px; cursor:pointer;
+  }
+  </style>
+  
   <script>
     // Default theme: dark
     document.documentElement.setAttribute('data-theme','dark');
@@ -155,16 +186,39 @@
       {
         title:'Secure VPN',
         tags:['Python'],
-        description:'Secure messaging/VPN protocol with ECDH, SHAKE128 KDF, AES-CBC, HMAC-SHA256, anti-replay nonces, and a MITM simulator.',
+        description:'Engineered a secure VPN between client and server using Diffie-Hellman key exchange and AES-CBC encryption with HMAC authentication. The system mitigates man-in-the-middle, delay, and replay attacks.',
         code:'https://github.com/YehoanatnEzra/Secure_VPN',
-        img:'photos/vpn.png' 
-      },
+        img:'photos/vpn.png',
+        details: `Engineered a secure VPN system from scratch in Python, enabling fully encrypted communication over an unreliable transport layer (UDP).
+        The system guarantees forward secrecy using an ephemeral Diffie–Hellman ratcheting scheme, and protects against replay, delay, and man-in-the-middle attacks.
+        Each message includes a new public key, allowing both parties to evolve their shared secrets per message.
+        Reliability is enforced using a custom ACK protocol that ensures delivery, despite the unreliable medium.
+
+        Key Features:
+        - End-to-end encryption using AES-CBC with HMAC for authentication.
+        - Ephemeral Diffie–Hellman over ECC (P-256) with per-message key rotation.
+        - Nonce validation for freshness and replay protection.
+        - Minimal GUI client (Tkinter) + reliable server (socket API).
+        - Tested against MITM, replay, and packet drop scenarios.`
+
+        },
       {
         title:'User-Level Thread Library',
         tags:['C++'],
-        description:'User-level threads with TCB abstraction and preemptive round-robin: create / yield / sleep / block / resume / terminate.',
+        description:'Implemented a user-level threading library in C++ with preemptive round-robin scheduling, custom thread control blocks (TCBs), and manual context switching via <code>sigsetjmp</code>/<code>siglongjmp</code>. Supports thread creation, initialization, sleep, blocking, resuming, and safe termination - all in user space without kernel involvement.',
         code:'https://github.com/YehoanatnEzra/System_Level_Projects/tree/main/User-Level%20Thread%20Management%20Library',
-        img:'photos/threads.png'
+        img:'photos/threads.png',
+        details: `Implemented a C++ user-level threading library with manual context switching, timer-based preemptive scheduling, and full lifecycle management.
+        Runs entirely in user space with no kernel dependencies.
+
+        Key Features:
+        - Round-robin scheduling using SIGVTALRM and setitimer.
+        - Context switching via sigsetjmp/siglongjmp, with manual SP/PC injection.
+        - Custom Thread Control Block (TCB) with independent stacks.
+        - Thread operations: spawn, sleep, block, resume, terminate.
+        - Signal masking for race-free context switches.
+        - Comprehensive stress tests simulating concurrent workloads.`
+
       },
    
       {
@@ -172,23 +226,56 @@
         tags:['Python'],
         description:'A job aggregation tool that pulls listings from multiple APIs, including a non-documented Airtable source (Goonzile). Parsed hidden URLs and dynamic headers from HTML and JavaScript to access raw data',
         code:'https://github.com/YehoanatnEzra/Job_Scanner',
-        img:'photos/hackaton.jpg'
+        img:'photos/hackaton.jpg',
+        details: `Implemented the Job Scanner module - a job search engine that aggregates listings from multiple
+        public APIs and a hidden Airtable source. Designed the logic to query, normalize, and filter job data,
+        including handling dynamic headers and hidden endpoints.
+
+        Key Features:
+        - Concurrent fetching from several APIs with caching for performance.
+        - Parsing and normalization of heterogeneous job listing formats.
+        - Robust keyword and location filtering with flexible search options.
+        - Data pipeline designed to be easily integrated into the platform.
+
+        This module was developed as part of a larger group project (InternSheep), an AI-powered resume tailoring
+        platform that customizes user resumes based on job descriptions.`
+
       },
      
     
       {
         title:'Cancer Attributes Prediction',
         tags:['Python'],
-        description:'ML pipeline predicting cancer risk/subtypes/metastasis with preprocessing + multi-stage models.',
+        description:'Built a machine learning pipeline on EHR data (~60K patients) to predict cancer risk, metastasis, and patient subtypes with multi-model approach.',
         code:'https://github.com/YehoanatnEzra/Cancer_Attributes_Prediction',
-        img:'photos/cancer.png'
+        img:'photos/cancer.png',
+        details: `Built a multi-task ML pipeline on structured EHR data from 60,000 cancer patients to predict metastasis sites, tumor area, and patient subtypes.
+
+        Key Features:
+        - Rich feature engineering from 70+ fields (cleaning, embeddings, categorical encoding).
+        - Models: logistic regression, random forest, gradient boosting with pruning.
+        - Dimensionality reduction: PCA, t-SNE.
+        - Clustering: k-means for patient subtype discovery.
+        - Emphasis on interpretability and clinical relevance through visualization.
+        - Modular, reusable code for classification, regression, and clustering.`
+
       },
       {
-        title:'Evolution of Color Naming Systems',
+        title:'Research - Evolution of Color Naming Systems',
         tags:['Python'],
-        description:'Simulation of evolving color naming via the information bottleneck and replicator dynamics.',
+        description:'Simulated the evolution of human color naming systems using the Information Bottleneck framework and replicator dynamics.',
         code:'https://github.com/YehoanatnEzra/Evolution_of_Color_Naming_Systems',
-        img:'photos/colors_project.png' 
+        img:'photos/colors_project.png',
+        details: `Reserch Project - Extended the Information Bottleneck framework of Zaslavsky et al. (2018) to simulate evolution
+        of human color naming systems under different environments.
+
+        Key Features:
+        - Implemented replicator dynamics for language population adaptation.
+        - Tested coding strategies: random assignment, k-means clustering, real-world categories.
+        - Simulated environmental contexts: forest, urban, shore, sunset.
+        - Tracked dynamics of color category emergence and stabilization.
+        - Compared results with empirical linguistic data.`
+
       },
       {
         title:'Needle WhatsApp Crawler',
@@ -202,21 +289,49 @@
         tags:['Python','Bash'],
         description:'Monitors CPU/memory/disk and auto-logs via a GitHub Actions (cron-like) workflow.',
         code:'https://github.com/YehoanatnEzra/System_Monitor',
-        img:'photos/system_monitor.png'
+        img:'photos/system_monitor.png',
+        details: `Mini project for system monitoring with Python + Bash, integrated into GitHub Actions.
+
+        Key Features:
+        - Resource tracking: CPU, memory, disk via psutil.
+        - Logs to CSV for analysis.
+        - Color-coded terminal UI.
+        - Bash wrapper for easy execution.
+        - Automated cron-like execution using GitHub Actions every 5 minutes.`
+
       },
       {
         title:'Nand2Tetris - From Gates to OS',
         tags:['Java'],
-        description:'Full Nand2Tetris track: HDL chips, assembler, VM translator, and a simple compiler/OS components.',
+        description:'Implemented a complete software-hardware system from logic gates to a working computer and compiler as part of the renowned Nand2Tetris course',
         code:'https://github.com/YehoanatnEzra/Nand2Tetris',
-        img:'photos/nand2tetris.png'
+        img:'photos/nand2tetris.png',
+        details: `Full computer system built from NAND gates to OS, following the Nand2Tetris track.
+
+        Key Features:
+        - Logic gates, ALU, CPU, memory modules using HDL.
+        - Assembler + VM translator.
+        - Compiler for a simple high-level language.
+        - Functional OS components.
+        - Rigorous testing with provided and custom test suites.`
+
       },
       {
         title:'Multi-threaded MapReduce Framework',
         tags:['C++'],
         description:'Parallel Map & Reduce phases with work queues and synchronization; scales across threads.',
         code:'https://github.com/YehoanatnEzra/System_Level_Projects/tree/main/Multi-threaded%20MapReduce%20framework',
-        img:'photos/mapreduce.png'
+        img:'photos/mapreduce.png',
+        details: `Developed a scalable MapReduce framework in C++ with concurrent execution of Map, Shuffle, and Reduce phases across CPU cores.
+        Optimized for high-throughput data processing.
+
+        Key Features:
+        - Parallel Map, Shuffle, and Reduce stages with mutexes, barriers, and condition variables.
+        - Custom shuffle algorithm to aggregate intermediate keys efficiently.
+        - Robust synchronization primitives to avoid race conditions.
+        - Integrated CI/CD with GitHub Actions for automated testing.
+        - Validated under heavy load with stress datasets.`
+
       },
      
       {
@@ -224,7 +339,15 @@
         tags:['Java'],
         description:'Tic-Tac-Toe tournament, BrickBreaker, ASCII art generator & 2D game - OOP & design patterns.',
         code:'https://github.com/YehoanatnEzra/Oop-Huji',
-        img:'photos/oop.jpg'
+        img:'photos/oop.jpg',
+        details: `Academic projects from HUJI’s OOP course demonstrating encapsulation, inheritance, polymorphism.
+
+        Key Projects:
+        - Tic Tac Toe (MVC, Swing GUI).
+        - Bricker (arcade-style game with power-ups and levels).
+        - ASCII Art generator (image → text).
+        - 2D tile-based adventure game (map engine, enemies, collectibles).`
+
       }
     ];
 
@@ -270,8 +393,10 @@
           <h3>${p.title}</h3>
           <p>${p.description}</p>
           <div class="actions">
-            <a class="btn-secondary" href="${p.code}" target="_blank" rel="noopener" aria-label="Open source code for ${p.title}">Code</a>
-          </div>
+  <a class="btn-secondary" href="${p.code}" target="_blank" rel="noopener">Code</a>
+  <button class="btn" onclick="showDetails('${p.title}')">More details</button>
+</div>
+
         </div>`;
       return el;
     }
@@ -286,6 +411,38 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     q.addEventListener('input', render);
     render();
+    // ----- Modal logic -----
+const MODAL = document.getElementById('modal');
+const MODAL_TITLE = document.getElementById('modal-title');
+const MODAL_BODY  = document.getElementById('modal-body');
+
+function showDetails(title){
+  const p = PROJECTS.find(x => x.title === title);
+  if(!p){
+    console.warn('Project not found:', title);
+    return;
+  }
+  MODAL_TITLE.textContent = p.title;
+  MODAL_BODY.textContent  = p.details || 'תיאור יתווסף בקרוב';
+  MODAL.hidden = false;
+  document.body.style.overflow = 'hidden'; // נועל את הדף מאחורי המודל
+}
+
+function closeModal(){
+  MODAL.hidden = true;
+  document.body.style.overflow = '';
+}
+
+
+MODAL.addEventListener('click', (e) => {
+  if(e.target === MODAL) closeModal();
+});
+
+
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape' && !MODAL.hidden) closeModal();
+});
+
   </script>
 </body>
 </html>
