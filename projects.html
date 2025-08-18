@@ -185,7 +185,7 @@
     const PROJECTS = [
       {
         title:'Secure VPN',
-        tags:['Python'],
+        tags:['Python' , 'Cybersecurity', 'Networking protocols'],
         description:'Engineered a secure VPN between client and server using Diffie-Hellman key exchange and AES-CBC encryption with HMAC authentication. The system mitigates man-in-the-middle, delay, and replay attacks.',
         code:'https://github.com/YehoanatnEzra/Secure_VPN',
         img:'photos/vpn.png',
@@ -204,7 +204,7 @@
         },
       {
         title:'User-Level Thread Library',
-        tags:['C++'],
+        tags:['C++', 'OS'],
         description:'Implemented a user-level threading library in C++ with preemptive round-robin scheduling, custom thread control blocks (TCBs), and manual context switching via <code>sigsetjmp</code>/<code>siglongjmp</code>. Supports thread creation, initialization, sleep, blocking, resuming, and safe termination - all in user space without kernel involvement.',
         code:'https://github.com/YehoanatnEzra/System_Level_Projects/tree/main/User-Level%20Thread%20Management%20Library',
         img:'photos/threads.png',
@@ -223,7 +223,7 @@
    
       {
         title:'Job Scanner',
-        tags:['Python'],
+        tags:['Python', 'HTML'],
         description:'A job aggregation tool that pulls listings from multiple APIs, including a non-documented Airtable source (Goonzile). Parsed hidden URLs and dynamic headers from HTML and JavaScript to access raw data',
         code:'https://github.com/YehoanatnEzra/Job_Scanner',
         img:'photos/hackaton.jpg',
@@ -243,7 +243,7 @@
     
       {
         title:'Cancer Attributes Prediction',
-        tags:['Python'],
+        tags:['Python', 'ML', 'Data analysis'],
         description:'Built a machine learning pipeline on EHR data (~60K patients) to predict cancer risk, metastasis, and patient subtypes with multi-model approach.',
         code:'https://github.com/YehoanatnEzra/Cancer_Attributes_Prediction',
         img:'photos/cancer.png',
@@ -260,7 +260,7 @@
       },
       {
         title:'Research - Evolution of Color Naming Systems',
-        tags:['Python'],
+        tags:['Python' , 'Reaserch'],
         description:'Simulated the evolution of human color naming systems using the Information Bottleneck framework and replicator dynamics.',
         code:'https://github.com/YehoanatnEzra/Evolution_of_Color_Naming_Systems',
         img:'photos/colors_project.png',
@@ -274,9 +274,42 @@
         - Compared results with empirical linguistic data.`
 
       },
+     
+      {
+        title:'Collision Course Detection - 3D project',
+        tags:['Python','Computer Vision 3D'],
+        description:'Built a computer vision system to detect collision courses from image sequences, combining perspective rectification, trajectory analysis, and geometric cross-ratio checks',
+        code:'https://github.com/YehoanatnEzra/Collision_Course_Detection',
+        img:'photos/computer_vision.png',
+        details: `Developed a computer vision project for detecting whether two moving objects are on a collision course from a sequence of images captured by a fixed camera.
+
+        The system includes two complementary pipelines:
+
+        1. Full CV Pipeline with Rectification:  
+          - Perspective rectification to normalize camera viewpoint.  
+          - Manual object tracking across frames.  
+          - Geometric analysis of distance and angle trends.  
+          - Collision flagged when angle is consistent and distance decreases steadily.  
+
+        2. Practical Pipeline (No Rectification): 
+          - Works directly on raw frames without camera calibration.  
+          - Linear fit of object trajectories with intersection & time-to-collision estimation.  
+          - Cross-ratio consistency check across four frames.  
+          - Outputs collision flag with visual indicator (“Collision Detected” in red or “No Collision” in green).  
+
+        Key Features: 
+        - Perspective correction and geometric modeling of trajectories.  
+        - Time-to-collision estimation and trajectory intersection analysis.  
+        - Robust cross-ratio validation for real-world camera settings.  
+        - Visualized results on sample image sequences (ships, shoes, etc.).  
+
+        This project demonstrates applied computer vision and geometry, integrating both theoretical and practical approaches for collision detection.`
+
+        
+      },
       {
         title:'Needle WhatsApp Crawler',
-        tags:['Python','JavaScript'],
+        tags:['Python','JavaScript', 'Data Science'],
         description:'Data collection & analysis pipeline for WhatsApp groups (still in progress).',
         code:'https://github.com/YehoanatnEzra/NeedleWhatsappCrawler',
         img:'photos/whasapp.png',
@@ -285,7 +318,7 @@
       },
       {
         title:'System Monitor',
-        tags:['Python','Bash'],
+        tags:['Python','Bash','Automation'],
         description:'Monitors CPU/memory/disk and auto-logs via a GitHub Actions (cron-like) workflow.',
         code:'https://github.com/YehoanatnEzra/System_Monitor',
         img:'photos/system_monitor.png',
@@ -301,7 +334,7 @@
       },
       {
         title:'Nand2Tetris',
-        tags:['Java'],
+        tags:['Python', 'HDL', 'assembler'],
         description:'Implemented a complete software-hardware system from logic gates to a working computer and compiler as part of the renowned Nand2Tetris course',
         code:'https://github.com/YehoanatnEzra/Nand2Tetris',
         img:'photos/nand2tetris.png',
@@ -317,7 +350,7 @@
       },
       {
         title:'Multi-threaded MapReduce Framework',
-        tags:['C++'],
+        tags:['C++', 'OS'],
         description:'Parallel Map & Reduce phases with work queues and synchronization; scales across threads.',
         code:'https://github.com/YehoanatnEzra/System_Level_Projects/tree/main/Multi-threaded%20MapReduce%20framework',
         img:'photos/mapreduce.png',
