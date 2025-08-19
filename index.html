@@ -303,19 +303,19 @@ header, main, footer, .hero {
     }
 
     @media (max-width: 640px) {
-      .skill-card { min-width: 280px; }
-      .headline p { font-size: 18px; }
-      /* Mobile hero stacking & tagline */
-      .headline-title { flex-direction: column; align-items: center; gap: 8px; }
-      .headline-title img { width: 86px; height: 86px; }
-      .headline .tagline { display: inline-block; white-space: nowrap; font-size: clamp(12px, 3.6vw, 18px); }
-      /* Keep About text left-aligned on mobile */
-      .about h2, .about p { text-align: left; }
-      .about p {
-    text-indent: 10px;
+    .skill-card { min-width: 280px; }
+    .headline p { font-size: 18px; }
+    /* Mobile hero stacking & tagline */
+    .headline-title { flex-direction: column; align-items: center; gap: 8px; }
+    .headline-title img { width: 86px; height: 86px; }
+    .headline .tagline { display: inline-block; white-space: nowrap; font-size: clamp(12px, 3.6vw, 18px); }
+    /* Keep About text left-aligned on mobile but with slight right shift */
+    .about h2, .about p { 
+      text-align: left; 
+      padding-left: 8px;   /* אפשר לשחק עם המספר: 6–12px */
+    }
   }
 
-    }
   </style>
 </head>
 <body>
