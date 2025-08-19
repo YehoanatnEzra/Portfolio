@@ -6,6 +6,15 @@
   <title>Projects — Yehonatan Ezra</title>
   <meta name="description" content="All projects by Yehonatan Ezra: short descriptions, source code links, README buttons, search & filters." />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='80'>📁</text></svg>">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W19HSSRQVJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-W19HSSRQVJ');
+  </script>
   <style>
     :root{
       --bg:#0b0c10; --panel:#12141a; --text:#e8ebf1; --muted:#a7b0c0;
@@ -206,7 +215,7 @@
         code:'https://github.com/YehoanatnEzra/Secure_VPN',
         img:'photos/vpn.png',
         details: `Engineered a secure VPN system from scratch in Python, enabling fully encrypted communication over an unreliable transport layer (UDP).
-        The system guarantees forward secrecy using an ephemeral Diffie–Hellman ratcheting scheme, and protects against replay, delay, and man-in-the-middle attacks.
+        The system guarantees forward secrecy using an ephemeral Diffie-Hellman ratcheting scheme, and protects against replay, delay, and man-in-the-middle attacks.
         Each message includes a new public key, allowing both parties to evolve their shared secrets per message.
         Reliability is enforced using a custom ACK protocol that ensures delivery, despite the unreliable medium.
 
