@@ -52,13 +52,30 @@
     html, body { min-height: 100%; }
 
     body {
-      /* Global background image for the whole page. Replace the path as needed. */
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Segoe UI Emoji";
-      background: url('photos/background1.jpg') center top / cover no-repeat fixed;
-      color: #fff; /* default light text for contrast against the photo */
-      line-height: 1.6;
-    }
+  /* Global background image */
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Segoe UI Emoji";
+  background: url('photos/background1.jpg') center top / cover no-repeat fixed;
+  color: #fff; /* default light text for contrast */
+  line-height: 1.6;
+  position: relative; /* required so ::before is positioned correctly */
+}
+
+body::before {
+  content: "";
+  position: fixed;  /* covers the entire viewport even when scrolling */
+  inset: 0;         /* stretch to all sides */
+  background: rgba(0,0,0,.35); /* adjust .25–.45 depending on how dark you want it */
+  z-index: 0;
+  pointer-events: none; /* so it doesn’t block clicks */
+}
+
+/* make sure all actual content sits above the overlay */
+header, main, footer, .hero {
+  position: relative;
+  z-index: 1;
+}
+
 
     a { color: inherit; text-decoration: none; }
     img { max-width: 100%; display: block; transition: transform .3s ease, filter .3s ease; }
@@ -101,19 +118,19 @@
       overflow: hidden;
     }
     /* Subtle dark overlay for readability; does not change the image itself */
-    .hero::before {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.25) 40%, rgba(0,0,0,.15));
-      z-index: 0;
+   
     }
     .hero .inner { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 40px; max-width: 1100px; padding: 80px 40px 40px; }
 
     /* Round avatar next to the title */
     .headline-title { display: flex; align-items: center; gap: 12px; }
     .headline-title img {
-      width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
-      box-shadow: 0 4px 12px rgba(0,0,0,.35);
-    }
+                        width: 80px;
+                        height: 80px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        box-shadow: 0 4px 12px rgba(0,0,0,.35);
+                        }
     .headline-title img:hover { transform: scale(1.03); }
 
     .headline h1 { font-size: clamp(38px, 6vw, 72px); margin: 0 0 6px; text-shadow: 0 3px 18px rgba(0,0,0,.55); }
@@ -137,9 +154,26 @@
        GENERIC SECTIONS & PANELS (transparent, over photo)
        ============================================= */
     main { background: none; }
-    section { padding: 48px 0; position: relative; z-index: 1; background: none; }
-    .section-title { font-size: 22px; margin: 0 0 12px; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,.7); }
-    .panel { background: none; border: none; box-shadow: none; color: #fff; }
+    section { 
+            padding: 48px 0;
+            position: relative;
+            z-index: 1;
+            background: 
+            none;
+           }
+
+    .section-title { 
+                    font-size: 22px; 
+                    margin: 0 0 12px; 
+                    color: #fff; 
+                    text-shadow: 0 2px 12px rgba(0,0,0,.7); 
+                  }
+    .panel { 
+          background: none; 
+          border: none; 
+          box-shadow: none; 
+          color: #fff; 
+        }
 
     /* =============================================
        QUICK LINKS (reusable card style)
@@ -222,14 +256,25 @@
     .scroll-btn.right { right: -6px; }
 
     /* Background controls (manual) */
-    .bg-btn {
-      position: absolute; bottom: 18px; z-index: 2;
-      width: 40px; height: 40px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35);
-      background: rgba(0,0,0,.35); color: #fff; display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(8px);
-    }
-    .bg-btn.left { left: 12px; }
-    .bg-btn.right { right: 12px; }
-    .bg-btn:hover { background: rgba(0,0,0,.5); }
+.bg-btn {
+  position: absolute; 
+  top: 40px;   /* puts them at the top */
+  z-index: 60; /* higher than overlay and content */
+  width: 40px; 
+  height: 40px; 
+  border-radius: 999px; 
+  border: 1px solid rgba(255,255,255,.35);
+  background: rgba(0,0,0,.35); 
+  color: #fff; 
+  display: grid; 
+  place-items: center; 
+  cursor: pointer; 
+  backdrop-filter: blur(8px);
+}
+.bg-btn.left  { left: 12px; }
+.bg-btn.right { right: 12px; }
+.bg-btn:hover { background: rgba(0,0,0,.5); }
+
     /* Mobile topbar for quick navigation */
     .topbar { display:none; padding:8px 0; border-top:1px solid rgba(255,255,255,.15); }
     .topbar .bar { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
@@ -312,6 +357,8 @@
        HERO: intro + avatar + About + background credit
        ===================================================== -->
   <section class="hero">
+    <button class="bg-btn left" aria-label="Previous background">‹</button>
+    <button class="bg-btn right" aria-label="Next background">›</button>
     <div class="bg-credit">These photos was taken during my exchange semester at UBC, while hiking in the Rockies.</div>
     <div class="inner">
       <div class="headline">
@@ -340,8 +387,7 @@
       </div>
       
     </div>
-    <button class="bg-btn left" aria-label="Previous background">‹</button>
-    <button class="bg-btn right" aria-label="Next background">›</button>
+    
     
   </section>
 
