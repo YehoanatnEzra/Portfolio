@@ -70,6 +70,38 @@ const PROJECTS = [
             This module was developed as part of a larger group project (InternSheep), an AI-powered resume tailoring platform that customizes user resumes based on job descriptions.`
   },
   {
+    title: 'Portfolio Website',
+    type: 'Personal',
+    tags: ['React', 'JavaScript', 'CSS'],
+    description: 'Personal portfolio website showcasing projects, athletic achievements, and professional experience built with React.',
+    code: 'https://github.com/YehoanatnEzra/Portfolio',
+    img: `${import.meta.env.BASE_URL}photos/projects/portfolio_web.jpg`,
+    details:`A modern, responsive portfolio website built from scratch to showcase my work and achievements.
+
+            Key Features:
+            - Responsive design optimized for desktop and mobile
+            - Interactive project showcase with filtering system
+            - Athletic achievements and running statistics
+            - Professional resume integration
+            - Background carousel with custom navigation
+            - Smooth animations and transitions
+            - Modern UI with gradient styling and glass effects
+
+            Technical Implementation:
+            - Built with React and modern JavaScript
+            - Modular CSS architecture for maintainability
+            - Custom components and reusable UI elements
+            - Responsive design with mobile-first approach
+            - Performance optimized with image preloading
+
+            This portfolio demonstrates proficiency in:
+            - Frontend development with React
+            - Responsive web design principles
+            - Modern CSS techniques and animations
+            - User experience and interface design
+            - Performance optimization strategies`
+  },
+  {
     title: 'Cancer Attributes Prediction',
     type: 'Hackathon', // moved here
     tags: ['Python', 'ML', 'Data analysis'],
@@ -217,50 +249,23 @@ const PROJECTS = [
     title: 'OOP Course Projects',
     type: 'Academic',
     tags: ['Java'],
-    description: 'Tic-Tac-Toe tournament, BrickBreaker, ASCII art generator & 2D game - OOP & design patterns.',
-    code: 'https://github.com/YehoanatnEzra/Oop-Huji',
+    description: 'Four Java projects: Tic-Tac-Toe Tournament, BrickBreaker, ASCII Art Generator, and a 2D Adventure Game - demonstrating OOP principles and design patterns.',
+     code: 'https://github.com/YehoanatnEzra/Oop-Huji',
     img: `${import.meta.env.BASE_URL}photos/projects/oop.jpg`,
-    details:`Academic projects from HUJI’s OOP course demonstrating encapsulation, inheritance, polymorphism.
+    details: `Academic projects written in Java as part of HUJI's OOP course, illustrating encapsulation, inheritance, polymorphism, and classic design patterns.
 
-            Key Projects:
-            - Tic Tac Toe (MVC, Swing GUI).
-            - Bricker (arcade-style game with power-ups and levels).
-            - ASCII Art generator (image → text).
-            - 2D tile-based adventure game (map engine, enemies, collectibles).`
-  },
-  {
-    title: 'Portfolio Website',
-    type: 'Personal',
-    tags: ['React', 'JavaScript', 'CSS'],
-    description: 'Personal portfolio website showcasing projects, athletic achievements, and professional experience built with React.',
-    code: 'https://github.com/YehoanatnEzra/Portfolio',
-    img: `${import.meta.env.BASE_URL}photos/projects/portfolio_web.jpg`,
-    details:`A modern, responsive portfolio website built from scratch to showcase my work and achievements.
+      Key Projects:
+      - Tic-Tac-Toe Tournament: Modular implementation with MVC architecture and Strategy pattern for different AI players.
+      - BrickBreaker: Arcade-style game with power-ups and dynamic levels, built on DanoGameLab 1.1.0.
+      - ASCII Art Generator: Image-to-text converter with adjustable resolution, custom character sets, and multiple output formats.
+      - 2D Adventure Game: Tile-based world with interactive objects, using Observer and Factory Method patterns for dynamic behavior.
 
-            Key Features:
-            - Responsive design optimized for desktop and mobile
-            - Interactive project showcase with filtering system
-            - Athletic achievements and running statistics
-            - Professional resume integration
-            - Background carousel with custom navigation
-            - Smooth animations and transitions
-            - Modern UI with gradient styling and glass effects
+      This repository highlights:
+      - Solid Java programming and clean OOP design
+      - Application of design patterns in real projects
+      - Hands-on experience with GUI/game libraries (DanoGameLab)`
 
-            Technical Implementation:
-            - Built with React and modern JavaScript
-            - Modular CSS architecture for maintainability
-            - Custom components and reusable UI elements
-            - Responsive design with mobile-first approach
-            - Performance optimized with image preloading
-            - Clean, semantic HTML structure
-
-            This portfolio demonstrates proficiency in:
-            - Frontend development with React
-            - Responsive web design principles
-            - Modern CSS techniques and animations
-            - User experience and interface design
-            - Performance optimization strategies`
-}
+  }
 ];
 
 /** Filter chips data */
@@ -354,11 +359,8 @@ export default function Projects() {
       </LampHeader>
 
       <main className="container">
-
         <div className="toolbar">
-          {/* Two-row layout: Main project types, secondary technologies */}
           <div className="filters-container">
-            {/* Primary row - Project Types (larger, prominent) */}
             <div className="filter-section">
               <div className="filters filters--primary" aria-label="Project type filters">
                 {TYPE_TAGS.map(t => {
@@ -379,8 +381,6 @@ export default function Projects() {
                 })}
               </div>
             </div>
-
-            {/* Secondary row - Technology Tags (smaller, subtle) */}
             <div className="filter-section">
               <div className="filters filters--secondary" aria-label="Technology filters">
                 {LANGUAGE_TAGS.map(t => {
