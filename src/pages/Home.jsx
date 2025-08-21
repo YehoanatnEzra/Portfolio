@@ -20,10 +20,10 @@ export default function Home() {
     []
   );
 
-  /* Add body overlay class only on Home */
+  /* Flag the body for page-specific styling (no longer rely on body background itself) */
   useEffect(() => {
-    document.body.classList.add("home-has-bg", "home-page");
-    return () => document.body.classList.remove("home-has-bg", "home-page");
+    document.body.classList.add("home-page");
+    return () => document.body.classList.remove("home-page");
   }, []);
 
   /** Background carousel (body background) */
@@ -50,7 +50,8 @@ export default function Home() {
   const images = isMobile ? mobileImages : desktopImages;
   
   const [bgIndex, setBgIndex] = useState(0);
-  const prevBodyBg = useRef('');
+  const [bgIsPortraitMobile, setBgIsPortraitMobile] = useState(false);
+  const [currentBg, setCurrentBg] = useState('');
 
   // Preload images
   useEffect(() => {
@@ -60,36 +61,20 @@ export default function Home() {
     });
   }, [desktopImages, mobileImages]);
 
-  // Apply selected background
+  // Prepare selected background (orientation aware) for fixed layer element
   useEffect(() => {
-    const body = document.body;
-    if (!prevBodyBg.current) prevBodyBg.current = body.style.background;
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-    // Load the current image to detect orientation (portrait vs landscape)
     const src = images[bgIndex];
+    setCurrentBg(src);
     let cancelled = false;
     const img = new Image();
     img.onload = () => {
       if (cancelled) return;
-      const isPortrait = img.naturalHeight > img.naturalWidth; // tall image
-      // For portrait images on mobile we prefer contain so the whole photo is visible
-      // (otherwise cover crops a lot of the top/bottom subject). For landscape keep cover.
-      const size = (isPortrait && isMobile) ? 'contain' : 'cover';
-      const attachment = (isIOS || (isPortrait && isMobile)) ? '' : ' fixed';
-      const position = (isPortrait && isMobile) ? 'center top' : 'center top';
-      body.style.background = `url('${src}') ${position} / ${size} no-repeat${attachment}`;
-      // Add a fallback background color for letterboxing when using contain
-      if (isPortrait && isMobile) body.style.backgroundColor = '#000';
+      const isPortrait = img.naturalHeight > img.naturalWidth;
+      setBgIsPortraitMobile(isPortrait && isMobile);
     };
     img.src = src;
-
-    return () => {
-      cancelled = true;
-      body.style.background = prevBodyBg.current;
-      body.style.backgroundColor = '';
-    };
-  }, [bgIndex, images]);
+    return () => { cancelled = true; };
+  }, [bgIndex, images, isMobile]);
 
   /** Skills carousel (horizontal scroll) */
   const skillsRef = useRef(null);
@@ -167,6 +152,18 @@ export default function Home() {
 
   return (
     <div>
+      {/* Blurred cover underlay fills entire screen */}
+      <div
+        className="home-bg-underlay"
+        style={{ backgroundImage: currentBg ? `url('${currentBg}')` : undefined }}
+        aria-hidden="true"
+      />
+      {/* Fixed full-screen main background layer (may use contain for portrait mobile) */}
+      <div
+        className={`home-bg-layer${bgIsPortraitMobile ? ' portrait-mobile' : ''}`}
+        style={{ backgroundImage: currentBg ? `url('${currentBg}')` : undefined }}
+        aria-hidden="true"
+      />
       {/* Header */}
       <header>
         <div className="container nav">
@@ -202,7 +199,7 @@ export default function Home() {
       </div>
 
       {/* Hero */}
-      <section className="hero">
+  <section className="hero">
         {/* Background controls */}
         <button className="bg-btn left" aria-label="Previous background"
           onClick={(e) => { setBgIndex(i => (i - 1 + images.length) % images.length); createClickGlow(e); }}>‹</button>

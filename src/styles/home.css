@@ -206,6 +206,45 @@ body.home-has-bg::before{
 }
 header, main, footer, .hero { position: relative; z-index: 1; }
 
+/* Dedicated fixed background layer (so body doesn't resize image on scroll) */
+.home-bg-layer {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: -2;
+  transform: translateZ(0);
+}
+/* Underlay: always cover + heavy blur + slight darkening so letterbox edges invisible */
+.home-bg-underlay {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  filter: blur(22px) brightness(0.55) saturate(1.1);
+  transform: scale(1.08); /* reduce visible edge after blur */
+  z-index: -3;
+}
+/* Overlay (existing) sits above the image */
+body.home-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.28);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Mobile portrait: show full image (letterbox) */
+@media (max-width: 768px) {
+  .home-bg-layer.portrait-mobile {
+    background-size: contain;
+    background-position: center top;
+  }
+}
+
 /* Mobile-specific enhancements for Home */
 @media (max-width: 768px) {
   .hero {

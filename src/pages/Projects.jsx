@@ -33,7 +33,7 @@ const PROJECTS = [
   {
     title: 'Secure VPN',
     type: 'Personal',
-    tags: ['Python', 'Cybersecurity', 'Networking protocols'],
+    tags: ['Python', 'Cybersecurity', 'Networking'],
     description: 'Engineered a secure VPN between client and server using Diffie-Hellman key exchange and AES-CBC encryption with HMAC authentication. The system mitigates man-in-the-middle, delay, and replay attacks.',
     code: 'https://github.com/YehoanatnEzra/Secure_VPN',
     img: `${import.meta.env.BASE_URL}photos/projects/vpn.png`,
@@ -327,7 +327,7 @@ export default function Projects() {
         <div className="container nav">
           <Link className="brand" to="/" aria-label="Back to home">Back</Link>
           <nav className="nav-links">
-            <a href="tel:0546473490" aria-label="Call Yehonatan">(+972) 054-647-3490</a>
+            <a href="tel:0546473490" aria-label="Call Yehonatan">054-647-3490</a>
             <span className="sep">•</span>
             <a href="mailto:yonzra12@gmail.com" aria-label="Email Yehonatan">yonzra12@gmail.com</a>
             <span className="sep">•</span>
