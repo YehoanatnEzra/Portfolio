@@ -75,6 +75,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 14px;
+  margin-bottom: 56px; /* add space before Technical Skills */
 }
 
 .qcard{
@@ -164,7 +165,13 @@
 }
 
 /* Skills specific links */
-#skills { color: inherit; }
+#skills { color: inherit; margin-top: 0; }
+@media (max-width: 900px){
+  .quick{ margin-bottom: 48px; }
+}
+@media (max-width: 600px){
+  .quick{ margin-bottom: 42px; }
+}
 #skills a, #skills .skill-card a { color: #fff; font-weight: 600; text-decoration: none; }
 #skills a:hover, #skills .skill-card a:hover { opacity: 0.9; text-decoration: underline; }
 #skills .contact-inline{ display:flex; gap:10px; align-items:center; }
@@ -205,14 +212,16 @@
 .scroll-btn:active{ filter: brightness(1.12) saturate(1.05); }
 
 @media (max-width: 768px){
-  .scroll-wrap{ --scroll-btn-w: 34px; }
-  .scroll-btn{ font-size:22px; }
+  .scroll-wrap{ --scroll-btn-w: 40px; }
+  .scroll-btn{ font-size:26px; top:0; bottom:0; min-height:100%; border-radius:14px; }
+  .skill-track{ padding-top:8px; padding-bottom:8px; }
 }
 @media (max-width: 480px){
   .scroll-wrap{ --scroll-btn-w: 30px; }
-  .scroll-btn{ font-size:20px; }
+  .scroll-btn{ font-size:20px; top:0; bottom:0; min-height:100%; border-radius:12px; }
   .scroll-btn.left{ left:0; }
   .scroll-btn.right{ right:0; }
+  .skill-track{ padding-top:6px; padding-bottom:6px; }
 }
 .scroll-wrap::before, .scroll-wrap::after{ display: none; }
 

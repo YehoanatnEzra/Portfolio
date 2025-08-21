@@ -407,7 +407,10 @@ export default function Home() {
         </section>
       </main>
 
-      <footer>© <span>{new Date().getFullYear()}</span> Yehonatan Ezra • Portfolio</footer>
+    <footer>
+       <span>{}</span> Written by Yehonatan Ezra • Built with JavaScript, React, and CSS
+    </footer>
+
     </div>
   );
 }
