@@ -25,8 +25,9 @@ export default function Resume() {
               <div className="container nav">
                     <div className="brand-group">
                       <Link className="brand" to="/" aria-label="Back to home">Home</Link>
-                      <Link className="brand" to="/projects" aria-label="Go to Projects page">Projects</Link>
                       <Link className="brand" to="/athletic" aria-label="Go to Athletic page">Athletic</Link>
+                      <Link className="brand" to="/projects" aria-label="Go to Projects page">Projects</Link>
+                     
                     </div>
                 <nav className="nav-links">
                   <a href="tel:0546473490" aria-label="Call Yehonatan">054-647-3490</a>
@@ -47,7 +48,7 @@ export default function Resume() {
             <section className="resume-section">
               <h2>Summary</h2>
               <p>
-                Computer Science student at Hebrew University of Jerusalem with strong coding skills in C/C++, Python, Java.
+                Computer Science student at the Hebrew University of Jerusalem and Cybersecurity Instructor in the Mamriot program, with strong coding skills in C/C++, Python, Java.
                 Creative and motivated with problem-solving, interpersonal skills. Independent collaborator committed to
                 inventing solutions under pressure. Former IDF Navy deputy commander, where I led a 12-person team in high-pressure
                 situations. Currently combining my academic ambitions with competitive athletics as a long-distance runner.
@@ -59,7 +60,7 @@ export default function Resume() {
               <ul>
                 <li>
                   <strong>B.Sc. in Computer Science, Hebrew University of Jerusalem</strong> – Expected 2026<br />
-                  GPA: 88.<br />
+                  GPA: 88<br />
                   {!showCourses ? (
                     <span
                       className="see-more"

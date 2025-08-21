@@ -164,7 +164,8 @@ export default function Home() {
       />
       {/* Current background layer */}
       <div
-        className={`home-bg-layer current${bgIsPortraitMobile ? ' portrait-mobile' : ''}`}
+  key={currentBg || 'bg'}
+  className={`home-bg-layer current${bgIsPortraitMobile ? ' portrait-mobile' : ''}`}
         style={{ backgroundImage: currentBg ? `url('${currentBg}')` : undefined }}
         aria-hidden="true"
       />
@@ -232,7 +233,7 @@ export default function Home() {
             <div id="about" className="about">
               <h2>About me</h2>
               <p>
-                I'm a Computer Science student at the Hebrew University of Jerusalem with a strong passion for both
+                Computer Science student at the Hebrew University of Jerusalem and Cybersecurity Instructor in the Mamriot program, with a strong passion for both
                 technology and athletics. Before my studies, I served as Deputy Commander of a Shaldag-class Warship
                 in the Israeli Navy, where I gained leadership and operational experience under pressure.
               </p>
