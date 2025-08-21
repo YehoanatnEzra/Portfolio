@@ -13,20 +13,38 @@
   flex-direction: column;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background: linear-gradient(135deg, #0a2540, #102c54, #1b3b73, #0d47a1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  color: #f0f4ff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-  background-size: 400% 400%;
-  animation: resumeGradientFlow 18s ease infinite;
+  position: relative;
+  overflow-x: hidden; /* keep horizontal artifacts hidden */
+  overflow-y: auto;   /* allow vertical scroll */
+  /* Dark → light blue sweep */
+  background: linear-gradient(160deg,#071422,#0c2338 24%,#103553 48%,#165581 70%,#3d8ec8 88%,#77c4ff 100%);
+  background-size: 200% 200%;
+  animation: resumeGradientFlow 36s ease-in-out infinite;
   color: var(--text);
+}
+
+/* Soft highlight + vignette */
+.resume-page::before{
+  content:""; position: fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(circle at 60% 18%, rgba(255,255,255,0.18), rgba(255,255,255,0) 55%),
+    radial-gradient(circle at 20% 75%, rgba(255,255,255,0.10), rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 45%, rgba(0,0,0,0.25) 100%);
+  mix-blend-mode: screen;
+  opacity:.65;
+}
+.resume-page::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%);
+  mix-blend-mode: normal;
 }
 
 /* ---- Header overrides only inside Resume page ---- */
 .resume-page header{
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background: linear-gradient(135deg, #0a2540, #102c54, #1b3b73, #0d47a1);
+  background: linear-gradient(150deg, rgba(7,20,34,0.85), rgba(16,53,83,0.72), rgba(61,142,200,0.35));
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   color: #f0f4ff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
@@ -79,6 +97,11 @@
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .resume-page { animation: none; background-position: 40% 50%; }
+  .resume-page::before{ opacity:.55; }
 }
 
 .resume-paper {

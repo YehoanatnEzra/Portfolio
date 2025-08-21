@@ -52,6 +52,7 @@ export default function Home() {
   const [bgIndex, setBgIndex] = useState(0);
   const [bgIsPortraitMobile, setBgIsPortraitMobile] = useState(false);
   const [currentBg, setCurrentBg] = useState('');
+  const [prevBg, setPrevBg] = useState(null); // for crossfade
 
   // Preload images
   useEffect(() => {
@@ -64,17 +65,20 @@ export default function Home() {
   // Prepare selected background (orientation aware) for fixed layer element
   useEffect(() => {
     const src = images[bgIndex];
+    // keep previous for fade only if different and already had one
+    setPrevBg(curr => (currentBg && currentBg !== src ? currentBg : null));
     setCurrentBg(src);
     let cancelled = false;
     const img = new Image();
     img.onload = () => {
       if (cancelled) return;
       const isPortrait = img.naturalHeight > img.naturalWidth;
-  setBgIsPortraitMobile(isPortrait && isMobile);
+      setBgIsPortraitMobile(isPortrait && isMobile);
     };
     img.src = src;
     return () => { cancelled = true; };
-  }, [bgIndex, images, isMobile]);
+    // intentionally depend on bgIndex/images/isMobile/currentBg
+  }, [bgIndex, images, isMobile, currentBg]);
 
   /** Skills carousel (horizontal scroll) */
   const skillsRef = useRef(null);
@@ -158,12 +162,20 @@ export default function Home() {
         style={{ backgroundImage: currentBg ? `url('${currentBg}')` : undefined }}
         aria-hidden="true"
       />
-      {/* Fixed full-screen main background layer (may use contain for portrait mobile) */}
+      {/* Current background layer */}
       <div
-        className={`home-bg-layer${bgIsPortraitMobile ? ' portrait-mobile' : ''}`}
+        className={`home-bg-layer current${bgIsPortraitMobile ? ' portrait-mobile' : ''}`}
         style={{ backgroundImage: currentBg ? `url('${currentBg}')` : undefined }}
         aria-hidden="true"
       />
+      {/* Previous background fading out */}
+      {prevBg && (
+        <div
+          className="home-bg-layer bg-fade-prev"
+          style={{ backgroundImage: `url('${prevBg}')` }}
+          aria-hidden="true"
+        />
+      )}
       {/* Header */}
       <header>
         <div className="container nav">
@@ -231,13 +243,13 @@ export default function Home() {
               </p>
               <p>
                 In addition to my studies, I am a competitive long-distance &amp; XC runner and coach. I revived the
-                Hebrew University’s running team and continue to lead it today. As an athlete, I placed third in the
+                Hebrew University's running team and continue to lead it today. As an athlete, I placed third in the
                 5k road Israeli National Championships 2025 and was part of the team that won the Canadian Cross Country
                 National Championship.
               </p>
               <p>
                 • Experienced with Python, C, C++, Java, Bash and more.<br />
-                • Particularly interested in low-level systems, cybersecurity, AI, and ML.
+                • Particularly interested in low-level systems, Cybersecurity, AI, and ML.
               </p>
             </div>
           </div>
