@@ -70,7 +70,7 @@ export default function Home() {
     img.onload = () => {
       if (cancelled) return;
       const isPortrait = img.naturalHeight > img.naturalWidth;
-      setBgIsPortraitMobile(isPortrait && isMobile);
+  setBgIsPortraitMobile(isPortrait && isMobile);
     };
     img.src = src;
     return () => { cancelled = true; };

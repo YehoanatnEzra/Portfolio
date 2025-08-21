@@ -240,8 +240,8 @@ body.home-page::before {
 /* Mobile portrait: show full image (letterbox) */
 @media (max-width: 768px) {
   .home-bg-layer.portrait-mobile {
-    background-size: contain;
-    background-position: center top;
+    background-size: cover; /* always fill */
+    background-position: center center;
   }
 }
 

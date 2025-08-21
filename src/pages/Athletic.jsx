@@ -101,7 +101,7 @@ export default function Athletic() {
         <div className="container nav">
           <Link className="brand" to="/" aria-label="Back to home">Back</Link>
           <nav className="nav-links">
-            <a href="tel:0546473490" aria-label="Call Yehonatan">(+972) 054-647-3490</a>
+            <a href="tel:0546473490" aria-label="Call Yehonatan">054-647-3490</a>
             <span className="sep">•</span>
             <a href="mailto:yonzra12@gmail.com" aria-label="Email Yehonatan">yonzra12@gmail.com</a>
             <span className="sep">•</span>
