@@ -128,24 +128,25 @@ export default function Home() {
         <div className="container nav">
           <div className="container topbar">
             <div className="bar">
-              <Link to="/athletic" aria-label="Go to Athletics">Athletics</Link>
-              <Link to="/projects" aria-label="Go to Projects">Projects</Link>
-             <Link to="/resume" aria-label="Go to Resume">Resume</Link>
+              <Link className="brand" to="/athletic" aria-label="Go to Athletics">Athletics</Link>
+              <Link className="brand" to="/projects" aria-label="Go to Projects">Projects</Link>
+             <Link className="brand" to="/resume" aria-label="Go to Resume">Resume</Link>
 
             </div>
 
             <nav className="nav-contacts">
-              <span className="contact-inline">
-                <a href="tel:0546473490" aria-label="Call Yehonatan">(+972) 054-647-3490</a>
+              <span className="contact-inline"> </span>
+                <a href="tel:0546473490" aria-label="Call Yehonatan">054-647-3490</a>
                 <span className="sep">•</span>
                 <a href="mailto:yonzra12@gmail.com" aria-label="Email Yehonatan">yonzra12@gmail.com</a>
-              </span>
+             
               <span className="sep">•</span>
               <a href="https://www.linkedin.com/in/yehonatanezra/" target="_blank" rel="noopener">LinkedIn</a>
               
               <span className="sep">•</span>
               
               <a href="https://github.com/YehoanatnEzra" target="_blank" rel="noopener">GitHub</a>
+              
             </nav>
           </div>
         </div>
