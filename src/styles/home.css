@@ -253,6 +253,8 @@ body.home-page::before {
   
   .hero .inner {
     max-width: 100%;
+    /* Reduce large desktop side padding (was 80px 40px 40px) */
+    padding: 60px 20px 32px;
   }
   
   .resume-actions {
