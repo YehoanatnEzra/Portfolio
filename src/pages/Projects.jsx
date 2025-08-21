@@ -456,7 +456,7 @@ export default function Projects() {
         )}
       </main>
 
-      <footer>© <span>{new Date().getFullYear()}</span> Yehonatan Ezra • Projects</footer>
+      
 
       {/* Modal */}
       {selected && (
