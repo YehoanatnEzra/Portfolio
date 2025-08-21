@@ -96,7 +96,8 @@ export default function Home() {
             <div className="bar">
               <Link to="/athletic" aria-label="Go to Athletics">Athletics</Link>
               <Link to="/projects" aria-label="Go to Projects">Projects</Link>
-              <a href="/Yehonatan_Ezra.pdf?v=2025-08-20" target="_blank" rel="noopener">Resume</a>
+             <Link to="/resume" aria-label="Go to Resume">Resume</Link>
+
             </div>
 
             <nav className="nav-contacts">
@@ -225,9 +226,9 @@ export default function Home() {
                       Open
                     </Link>
                     <a
-                      href="/Yehonatan_Ezra.pdf?v=2025-08-20"
-                      target="_blank"
-                      rel="noopener"
+                      href="/Yehonatan_Ezra.pdf"
+                      download
+                     
                       style={pillWhite}
                       aria-label="Download PDF résumé"
                     >
