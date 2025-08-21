@@ -13,6 +13,12 @@ export default function Resume() {
     return () => html.setAttribute("data-theme", prev || "light");
   }, []);
 
+  /* Add resume-page class to body */
+  useEffect(() => {
+    document.body.classList.add("resume-page");
+    return () => document.body.classList.remove("resume-page");
+  }, []);
+
   return (
     <div className="resume-page">
           <header>
@@ -167,9 +173,7 @@ export default function Resume() {
         </section>
       </main>
 
-      <footer className="resume-footer">
-        © <span>{new Date().getFullYear()}</span> Yehonatan Ezra • Resume
-      </footer>
+      
     </div>
   );
 }

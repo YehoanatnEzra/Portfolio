@@ -2,6 +2,11 @@
    Projects page: toolbar, chips, grid, cards, modal
    ========================================================= */
 
+/* Projects page header - narrower topbar */
+.projects-page header .nav {
+  padding: 0.5rem 0; /* Reduced from default 1rem to make it narrower */
+}
+
 .toolbar{
   display: flex;
   flex-direction: column;

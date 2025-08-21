@@ -27,28 +27,68 @@ export default function Home() {
   }, []);
 
   /** Background carousel (body background) */
-  const images = useMemo(() => ([
-    '/photos/background1.jpg',
-    '/photos/background2.jpg',
-    '/photos/background3.jpg',
-    '/photos/background4.jpg',
+  const desktopImages = useMemo(() => ([
+    '/photos/backgrounds/background1.jpg',
+    '/photos/backgrounds/background2.jpg',
+    '/photos/backgrounds/background3.jpg',
+    '/photos/backgrounds/background4.jpg',
   ]), []);
+  
+  const mobileImages = useMemo(() => ([
+    '/photos/backgrounds/mobile_background1.jpg',
+    '/photos/backgrounds/mobile_background2.jpg',
+    '/photos/backgrounds/mobile_background3.jpg',
+    '/photos/backgrounds/mobile_background4.jpg',
+  ]), []);
+  
+  // Detect if we're on mobile
+  const isMobile = useMemo(() => 
+    typeof window !== 'undefined' && window.innerWidth <= 768
+  , []);
+  
+  // Choose appropriate image set
+  const images = isMobile ? mobileImages : desktopImages;
+  
   const [bgIndex, setBgIndex] = useState(0);
   const prevBodyBg = useRef('');
 
   // Preload images
   useEffect(() => {
-    images.forEach(src => { const i = new Image(); i.src = src; });
-  }, [images]);
+    [...desktopImages, ...mobileImages].forEach(src => { 
+      const i = new Image(); 
+      i.src = src; 
+    });
+  }, [desktopImages, mobileImages]);
 
   // Apply selected background
   useEffect(() => {
     const body = document.body;
     if (!prevBodyBg.current) prevBodyBg.current = body.style.background;
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const bg = `url('${images[bgIndex]}') center top / cover no-repeat${isIOS ? '' : ' fixed'}`;
-    body.style.background = bg;
-    return () => { body.style.background = prevBodyBg.current; };
+
+    // Load the current image to detect orientation (portrait vs landscape)
+    const src = images[bgIndex];
+    let cancelled = false;
+    const img = new Image();
+    img.onload = () => {
+      if (cancelled) return;
+      const isPortrait = img.naturalHeight > img.naturalWidth; // tall image
+      // For portrait images on mobile we prefer contain so the whole photo is visible
+      // (otherwise cover crops a lot of the top/bottom subject). For landscape keep cover.
+      const size = (isPortrait && isMobile) ? 'contain' : 'cover';
+      const attachment = (isIOS || (isPortrait && isMobile)) ? '' : ' fixed';
+      const position = (isPortrait && isMobile) ? 'center top' : 'center top';
+      body.style.background = `url('${src}') ${position} / ${size} no-repeat${attachment}`;
+      // Add a fallback background color for letterboxing when using contain
+      if (isPortrait && isMobile) body.style.backgroundColor = '#000';
+    };
+    img.src = src;
+
+    return () => {
+      cancelled = true;
+      body.style.background = prevBodyBg.current;
+      body.style.backgroundColor = '';
+    };
   }, [bgIndex, images]);
 
   /** Skills carousel (horizontal scroll) */
@@ -72,7 +112,11 @@ export default function Home() {
       button.style.background = originalBg;
     }, 200);
     
-    // Method 2: DOM element approach (backup)
+    // Method 2: DOM element approach (backup) - skip for bg-btn to maintain positioning
+    if (button.classList.contains('bg-btn')) {
+      return; // Don't add glow element to background buttons to maintain fixed positioning
+    }
+    
     const existingGlow = button.querySelector('.click-glow');
     if (existingGlow) existingGlow.remove();
     
@@ -152,6 +196,11 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Photo credit - moved above hero */}
+      <div className="bg-credit">
+        These photos were taken during my exchange semester at UBC, while hiking in the Rockies.
+      </div>
+
       {/* Hero */}
       <section className="hero">
         {/* Background controls */}
@@ -160,14 +209,10 @@ export default function Home() {
         <button className="bg-btn right" aria-label="Next background"
           onClick={(e) => { setBgIndex(i => (i + 1) % images.length); createClickGlow(e); }}>›</button>
 
-        <div className="bg-credit">
-          These photos were taken during my exchange semester at UBC, while hiking in the Rockies.
-        </div>
-
         <div className="inner">
           <div className="headline">
             <div className="headline-title">
-              <img src="/photos/profil.jpg" alt="Profile" />
+              <img src="/photos/profile/profil.jpg" alt="Profile" />
               <h1>Hi, I'm Yehonatan</h1>
             </div>
 

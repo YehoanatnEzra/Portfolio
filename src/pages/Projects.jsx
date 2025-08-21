@@ -16,7 +16,7 @@ const PROJECTS = [
     description:
       'Engineered a secure VPN between client and server using Diffie-Hellman key exchange and AES-CBC encryption with HMAC authentication. The system mitigates man-in-the-middle, delay, and replay attacks.',
     code: 'https://github.com/YehoanatnEzra/Secure_VPN',
-    img: '/photos/vpn.png',
+    img: '/photos/projects/vpn.png',
     details: `Engineered a secure VPN system from scratch in Python, enabling fully encrypted communication over an unreliable transport layer (UDP).
 The system guarantees forward secrecy using an ephemeral Diffie-Hellman ratcheting scheme, and protects against replay, delay, and man-in-the-middle attacks.
 Each message includes a new public key, allowing both parties to evolve their shared secrets per message.
@@ -37,7 +37,7 @@ Key Features:
     description:
       'A job aggregation tool that pulls listings from multiple APIs, including a non-documented Airtable source (Goonzile). Parsed hidden URLs and dynamic headers from HTML and JavaScript to access raw data.',
     code: 'https://github.com/YehoanatnEzra/Job_Scanner',
-    img: '/photos/hackaton.jpg',
+    img: '/photos/projects/hackaton.jpg',
     details: `Implemented the Job Scanner module - a job search engine that aggregates listings from multiple public APIs and a hidden Airtable source.
 Designed the logic to query, normalize, and filter job data, including handling dynamic headers and hidden endpoints.
 
@@ -56,7 +56,7 @@ This module was developed as part of a larger group project (InternSheep), an AI
     description:
       'Built a machine learning pipeline on EHR data (~60K patients) to predict cancer risk, metastasis, and patient subtypes with a multi-model approach. (Hackathon project)',
     code: 'https://github.com/YehoanatnEzra/Cancer_Attributes_Prediction',
-    img: '/photos/cancer.png',
+    img: '/photos/projects/cancer.png',
     details: `Built a multi-task ML pipeline on structured EHR data from 60,000 cancer patients to predict metastasis sites, tumor area, and patient subtypes. (Hackathon project)
 
 Key Features:
@@ -74,7 +74,7 @@ Key Features:
     description:
       'Implemented a user-level threading library in C++ with preemptive round-robin scheduling, custom thread control blocks (TCBs), and manual context switching via <code>sigsetjmp</code>/<code>siglongjmp</code>. Supports thread creation, initialization, sleep, blocking, resuming, and safe termination - all in user space without kernel involvement.',
     code: 'https://github.com/YehoanatnEzra/System_Level_Projects/tree/main/User-Level%20Thread%20Management%20Library',
-    img: '/photos/threads.png',
+    img: '/photos/projects/threads.png',
     details: `Implemented a C++ user-level threading library with manual context switching, timer-based preemptive scheduling, and full lifecycle management.
 Runs entirely in user space with no kernel dependencies.
 
@@ -93,7 +93,7 @@ Key Features:
     description:
       'Simulated the evolution of human color naming systems using the Information Bottleneck framework and replicator dynamics.',
     code: 'https://github.com/YehoanatnEzra/Evolution_of_Color_Naming_Systems',
-    img: '/photos/colors_project.png',
+    img: '/photos/projects/colors_project.png',
     details: `Reserch Project - Extended the Information Bottleneck framework of Zaslavsky et al. (2018) to simulate evolution of human color naming systems under different environments.
 
 Key Features:
@@ -110,7 +110,7 @@ Key Features:
     description:
       'Built a computer vision system to detect collision courses from image sequences, combining perspective rectification, trajectory analysis, and geometric cross-ratio checks',
     code: 'https://github.com/YehoanatnEzra/Collision_Course_Detection',
-    img: '/photos/computer_vision.png',
+    img: '/photos/projects/computer_vision.png',
     details: `Developed a computer vision project for detecting whether two moving objects are on a collision course from a sequence of images captured by a fixed camera.
 
 The system includes two complementary pipelines:
@@ -141,7 +141,7 @@ This project demonstrates applied computer vision and geometry, integrating both
     tags: ['Python', 'JavaScript', 'Data Science'],
     description: 'Data collection & analysis pipeline for WhatsApp groups.(still in progress...)',
     code: 'https://github.com/YehoanatnEzra/NeedleWhatsappCrawler',
-    img: '/photos/whasapp.png',
+    img: '/photos/projects/whasapp.png',
     details: 'still in progress...'
   },
   {
@@ -150,7 +150,7 @@ This project demonstrates applied computer vision and geometry, integrating both
     tags: ['Python', 'Bash', 'Automation'],
     description: 'Monitors CPU/memory/disk and auto-logs via a GitHub Actions (cron-like) workflow.',
     code: 'https://github.com/YehoanatnEzra/System_Monitor',
-    img: '/photos/system_monitor.png',
+    img: '/photos/projects/system_monitor.png',
     details: `Mini project for system monitoring with Python and Bash, integrated into GitHub Actions.
 
 Key Features:
@@ -167,7 +167,7 @@ Key Features:
     description:
       'Implemented a complete software-hardware system from logic gates to a working computer and compiler as part of the renowned Nand2Tetris course',
     code: 'https://github.com/YehoanatnEzra/Nand2Tetris',
-    img: '/photos/nand2tetris.png',
+    img: '/photos/projects/nand2tetris.png',
     details: `Full computer system built from NAND gates to OS.
 
 Key Features:
@@ -184,7 +184,7 @@ Key Features:
     description:
       'Parallel Map & Reduce phases with work queues and synchronization; scales across threads.',
     code: 'https://github.com/YehoanatnEzra/System_Level_Projects/tree/main/Multi-threaded%20MapReduce%20framework',
-    img: '/photos/mapreduce.png',
+    img: '/photos/projects/mapreduce.png',
     details: `Developed a scalable MapReduce framework in C++ with concurrent execution of Map, Shuffle, and Reduce phases across CPU cores.
 Optimized for high-throughput data processing.
 
@@ -202,7 +202,7 @@ Key Features:
     description:
       'Tic-Tac-Toe tournament, BrickBreaker, ASCII art generator & 2D game - OOP & design patterns.',
     code: 'https://github.com/YehoanatnEzra/Oop-Huji',
-    img: '/photos/oop.jpg',
+    img: '/photos/projects/oop.jpg',
     details: `Academic projects from HUJI’s OOP course demonstrating encapsulation, inheritance, polymorphism.
 
 Key Projects:
@@ -210,11 +210,44 @@ Key Projects:
 - Bricker (arcade-style game with power-ups and levels).
 - ASCII Art generator (image → text).
 - 2D tile-based adventure game (map engine, enemies, collectibles).`
+  },
+  {
+    title: 'Portfolio Website',
+    type: 'Personal',
+    tags: ['React', 'JavaScript', 'CSS'],
+    description: 'Personal portfolio website showcasing projects, athletic achievements, and professional experience built with React.',
+    code: 'https://github.com/YehoanatnEzra/Portfolio',
+    img: '/photos/projects/portfolio_web.jpg',
+    details: `A modern, responsive portfolio website built from scratch to showcase my work and achievements.
+
+Key Features:
+- Responsive design optimized for desktop and mobile
+- Interactive project showcase with filtering system
+- Athletic achievements and running statistics
+- Professional resume integration
+- Background carousel with custom navigation
+- Smooth animations and transitions
+- Modern UI with gradient styling and glass effects
+
+Technical Implementation:
+- Built with React and modern JavaScript
+- Modular CSS architecture for maintainability
+- Custom components and reusable UI elements
+- Responsive design with mobile-first approach
+- Performance optimized with image preloading
+- Clean, semantic HTML structure
+
+This portfolio demonstrates proficiency in:
+- Frontend development with React
+- Responsive web design principles
+- Modern CSS techniques and animations
+- User experience and interface design
+- Performance optimization strategies`
   }
 ];
 
 /** Filter chips data */
-const LANGUAGE_TAGS = ['Python', 'C++', 'Java', 'Bash'];
+const LANGUAGE_TAGS = ['Python', 'C', 'C++', 'Java', 'React'];
 const TYPE_TAGS = ['Academic', 'Personal', 'Hackathon'];
 
 export default function Projects() {
@@ -225,6 +258,12 @@ export default function Projects() {
     const prev = html.getAttribute('data-theme');
     html.setAttribute('data-theme', 'dark');
     return () => html.setAttribute('data-theme', prev || 'light');
+  }, []);
+
+  /* Add projects-page class to body */
+  useEffect(() => {
+    document.body.classList.add("projects-page");
+    return () => document.body.classList.remove("projects-page");
   }, []);
 
   const [active, setActive] = useState(new Set(LANGUAGE_TAGS));

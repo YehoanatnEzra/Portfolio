@@ -2,6 +2,12 @@
    Athletics: hero & team full-bleed carousels + records
    ========================================================= */
 
+/* Athletic page header - narrower topbar */
+body:has([data-page="athletic"]) header .nav,
+.athletic-page header .nav {
+  padding: 0.5rem 0; /* Reduced from default 1rem to make it narrower */
+}
+
 /* HERO */
 .hero-wrap { position: relative; height: 90vh; min-height: 560px; overflow: hidden; }
 .hero-slides { position: absolute; inset: 0; }

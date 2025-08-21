@@ -74,19 +74,25 @@ export default function Athletic() {
     return () => html.setAttribute('data-theme', prev || 'light');
   }, []);
 
+  /* Add athletic-page class to body */
+  useEffect(() => {
+    document.body.classList.add("athletic-page");
+    return () => document.body.classList.remove("athletic-page");
+  }, []);
+
   const heroImages = [
-    { url: '/photos/athletic3.jpg', pos: 'center 20%' },
-    { url: '/photos/athletic5.jpg' },
-    { url: '/photos/athletic1.jpg' },
-    { url: '/photos/athletic8.jpg' },
-    { url: '/photos/athletic6.jpg', pos: 'center 30%' },
-    { url: '/photos/athletic7.jpg' },
+    { url: '/photos/athletic/athletic3.jpg', pos: 'center 20%' },
+    { url: '/photos/athletic/athletic5.jpg' },
+    { url: '/photos/athletic/athletic1.jpg' },
+    { url: '/photos/athletic/athletic8.jpg' },
+    { url: '/photos/athletic/athletic6.jpg', pos: 'center 30%' },
+    { url: '/photos/athletic/athletic7.jpg' },
   ];
 
   const teamImages = [
-    { url: '/photos/Huji1.jpg', pos: 'center 90%' },
-    { url: '/photos/Huji2.jpg' },
-    { url: '/photos/Huji4.jpg', pos: 'top' },
+    { url: '/photos/athletic/Huji1.jpg', pos: 'center 90%' },
+    { url: '/photos/athletic/Huji2.jpg' },
+    { url: '/photos/athletic/Huji4.jpg', pos: 'top' },
   ];
 
   return (
@@ -162,8 +168,6 @@ export default function Athletic() {
           </div>
         </section>
       </main>
-
-      <footer>© <span>{new Date().getFullYear()}</span> Yehonatan Ezra • Athletics</footer>
     </div>
   );
 }

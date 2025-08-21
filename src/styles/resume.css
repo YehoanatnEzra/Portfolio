@@ -1,6 +1,12 @@
 /* =========================================================
    Resume page
    ========================================================= */
+
+/* Resume page header - narrower topbar */
+.resume-page header .nav {
+  padding: 0.5rem 0; /* Reduced from default 1rem to make it narrower */
+}
+
 .resume-page {
   min-height: 100vh;
   display: flex;
