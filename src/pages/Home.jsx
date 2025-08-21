@@ -102,8 +102,8 @@ export default function Home() {
     }, 200);
     
     // Method 2: DOM element approach (backup) - skip for bg-btn to maintain positioning
-    if (button.classList.contains('bg-btn')) {
-      return; // Don't add glow element to background buttons to maintain fixed positioning
+    if (button.classList.contains('bg-btn') || button.classList.contains('scroll-btn')) {
+      return; // Skip glow for background & scroll buttons to keep shape consistent
     }
     
     const existingGlow = button.querySelector('.click-glow');
