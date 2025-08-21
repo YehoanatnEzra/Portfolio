@@ -152,7 +152,7 @@ export default function Athletic() {
           <div className="team-inner container">
             <div className="about">
               <h2 style={{ fontSize: 42, marginBottom: 12 }}>University Running Team</h2>
-              <p style={{ fontSize: 18 }}>
+              <p className="team-text" style={{ fontSize: 18 }}>
                 As a student and athlete, I was frustrated by the absence of an active running team at my university,
                 so I took the initiative to revive it. <br />
                 Today, I coach the team together with Elad Maman, building a strong group culture and guiding athletes

@@ -101,10 +101,14 @@ body:has([data-page="athletic"]) header .nav,
   .hero-inner,
   .team-inner {
     padding: 1.5rem 1rem;
-    padding-bottom: 6vh;
-    align-items: center;
+    padding-bottom: 14vh; /* base before overrides */
+    align-items: flex-end; /* push text down */
     text-align: center;
   }
+  /* Lower only team text further */
+  .team-inner { padding-bottom: 3vh; }
+  /* Lower hero (competitive runner) similar to team */
+  .hero-inner { padding-bottom: 4vh; }
   
   .hero-inner .about,
   .team-inner .about {
@@ -112,22 +116,23 @@ body:has([data-page="athletic"]) header .nav,
   }
   
   .hero-inner .about h1 {
-    font-size: 2.25rem !important;
+    font-size: 2.05rem !important; /* slightly smaller */
     line-height: 1.2;
     margin-bottom: 1rem;
   }
   
   .team-inner .about h2 {
-    font-size: 1.875rem !important;
+    font-size: 1.7rem !important; /* slightly smaller */
     line-height: 1.3;
     margin-bottom: 0.75rem;
   }
   
   .hero-inner .about p,
   .team-inner .about p {
-    font-size: 1.125rem;
-    line-height: 1.5;
+    font-size: 1rem; /* was 1.125rem */
+    line-height: 1.48;
   }
+  .team-inner .about .team-text { font-size: 0.95rem; line-height: 1.45; }
   
   .records-inner {
     padding: 3rem 1.5rem;
@@ -168,24 +173,28 @@ body:has([data-page="athletic"]) header .nav,
   .hero-inner,
   .team-inner {
     padding: 1rem 0.75rem;
-    padding-bottom: 5vh;
+    padding-bottom: 13vh; /* base before overrides */
+    align-items: flex-end;
   }
+  .team-inner { padding-bottom: 2.5vh; }
+  .hero-inner { padding-bottom: 3vh; }
   
   .hero-inner .about h1 {
-    font-size: 2rem !important;
+    font-size: 1.85rem !important; /* slightly smaller */
     margin-bottom: 0.75rem;
   }
   
   .team-inner .about h2 {
-    font-size: 1.625rem !important;
+    font-size: 1.5rem !important; /* slightly smaller */
     margin-bottom: 0.5rem;
   }
   
   .hero-inner .about p,
   .team-inner .about p {
-    font-size: 1rem;
-    line-height: 1.4;
+    font-size: 0.9375rem; /* 15px approx */
+    line-height: 1.42;
   }
+  .team-inner .about .team-text { font-size: 0.875rem; line-height: 1.4; }
   
   .records-inner {
     padding: 2.5rem 1rem;
@@ -216,16 +225,14 @@ body:has([data-page="athletic"]) header .nav,
   .hero-inner,
   .team-inner {
     padding: 0.75rem 0.5rem;
-    padding-bottom: 4vh;
+    padding-bottom: 12vh; /* base before overrides */
+    align-items: flex-end;
   }
+  .team-inner { padding-bottom: 2vh; }
+  .hero-inner { padding-bottom: 2.5vh; }
   
-  .hero-inner .about h1 {
-    font-size: 1.75rem !important;
-  }
-  
-  .team-inner .about h2 {
-    font-size: 1.5rem !important;
-  }
+  .hero-inner .about h1 { font-size: 1.6rem !important; }
+  .team-inner .about h2 { font-size: 1.4rem !important; }
   
   .records-inner {
     padding: 2rem 0.75rem;
@@ -235,7 +242,6 @@ body:has([data-page="athletic"]) header .nav,
     font-size: 1.5rem;
   }
   
-  .records-inner ul {
-    font-size: 0.9rem;
-  }
+  .records-inner ul { font-size: 0.85rem; }
+  .team-inner .about .team-text { font-size: 0.8rem; }
 }
