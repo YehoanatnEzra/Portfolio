@@ -28,17 +28,17 @@ export default function Home() {
 
   /** Background carousel (body background) */
   const desktopImages = useMemo(() => ([
-    '/photos/backgrounds/background1.jpg',
-    '/photos/backgrounds/background2.jpg',
-    '/photos/backgrounds/background3.jpg',
-    '/photos/backgrounds/background4.jpg',
+    `${import.meta.env.BASE_URL}photos/backgrounds/background1.jpg`,
+    `${import.meta.env.BASE_URL}photos/backgrounds/background2.jpg`,
+    `${import.meta.env.BASE_URL}photos/backgrounds/background3.jpg`,
+    `${import.meta.env.BASE_URL}photos/backgrounds/background4.jpg`,
   ]), []);
   
   const mobileImages = useMemo(() => ([
-    '/photos/backgrounds/mobile_background1.jpg',
-    '/photos/backgrounds/mobile_background2.jpg',
-    '/photos/backgrounds/mobile_background3.jpg',
-    '/photos/backgrounds/mobile_background4.jpg',
+    `${import.meta.env.BASE_URL}photos/backgrounds/mobile_background1.jpg`,
+    `${import.meta.env.BASE_URL}photos/backgrounds/mobile_background2.jpg`,
+    `${import.meta.env.BASE_URL}photos/backgrounds/mobile_background3.jpg`,
+    `${import.meta.env.BASE_URL}photos/backgrounds/mobile_background4.jpg`,
   ]), []);
   
   // Detect if we're on mobile
@@ -212,7 +212,7 @@ export default function Home() {
         <div className="inner">
           <div className="headline">
             <div className="headline-title">
-              <img src="/photos/profile/profil.jpg" alt="Profile" />
+              <img src={`${import.meta.env.BASE_URL}photos/profile/profil.jpg`} alt="Profile" />
               <h1>Hi, I'm Yehonatan</h1>
             </div>
 

@@ -81,18 +81,18 @@ export default function Athletic() {
   }, []);
 
   const heroImages = [
-    { url: '/photos/athletic/athletic3.jpg', pos: 'center 20%' },
-    { url: '/photos/athletic/athletic5.jpg' },
-    { url: '/photos/athletic/athletic1.jpg' },
-    { url: '/photos/athletic/athletic8.jpg' },
-    { url: '/photos/athletic/athletic6.jpg', pos: 'center 30%' },
-    { url: '/photos/athletic/athletic7.jpg' },
+    { url: `${import.meta.env.BASE_URL}photos/athletic/athletic3.jpg`, pos: 'center 20%' },
+    { url: `${import.meta.env.BASE_URL}photos/athletic/athletic5.jpg` },
+    { url: `${import.meta.env.BASE_URL}photos/athletic/athletic1.jpg` },
+    { url: `${import.meta.env.BASE_URL}photos/athletic/athletic8.jpg` },
+    { url: `${import.meta.env.BASE_URL}photos/athletic/athletic6.jpg`, pos: 'center 30%' },
+    { url: `${import.meta.env.BASE_URL}photos/athletic/athletic7.jpg` },
   ];
 
   const teamImages = [
-    { url: '/photos/athletic/Huji1.jpg', pos: 'center 90%' },
-    { url: '/photos/athletic/Huji2.jpg' },
-    { url: '/photos/athletic/Huji4.jpg', pos: 'top' },
+    { url: `${import.meta.env.BASE_URL}photos/athletic/Huji1.jpg`, pos: 'center 90%' },
+    { url: `${import.meta.env.BASE_URL}photos/athletic/Huji2.jpg` },
+    { url: `${import.meta.env.BASE_URL}photos/athletic/Huji4.jpg`, pos: 'top' },
   ];
 
   return (
