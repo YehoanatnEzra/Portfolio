@@ -179,7 +179,7 @@ export default function Home() {
                 <h3 style={h3Style}>My Athletic Journey</h3>
                 <div style={rowBetween}>
                   <p style={{ margin: 0, flex: 1 }}>
-                    My journey as a middle distance runner and coach.
+                    My journey as a long distance runner and coach.
                   </p>
                   <div style={btnGroup}>
                     <Link to="/athletic" style={pillGhost} aria-label="Explore Athletics">

@@ -15,17 +15,20 @@ export default function Resume() {
 
   return (
     <div className="resume-page">
-      <header className="resume-header">
-        <div className="container nav">
-          <Link className="brand" to="/" aria-label="Back to home">Back</Link>
-          <nav className="nav-links">
-            <a className="btn-secondary" href="/Yehonatan_Ezra.pdf" target="_blank" rel="noopener">
-              Open PDF in new tab
-            </a>
-          
-          </nav>
-        </div>
-      </header>
+          <header>
+              <div className="container nav">
+                <Link className="brand" to="/" aria-label="Back to home">Back</Link>
+                <nav className="nav-links">
+                  <a href="tel:0546473490" aria-label="Call Yehonatan">(+972) 054-647-3490</a>
+                  <span className="sep">•</span>
+                  <a href="mailto:yonzra12@gmail.com" aria-label="Email Yehonatan">yonzra12@gmail.com</a>
+                  <span className="sep">•</span>
+                  <a href="https://www.linkedin.com/in/yehonatanezra/" aria-label="LinkedIn">LinkedIn</a>
+                  <span className="sep">•</span>
+                  <a href="https://github.com/YehoanatnEzra/" aria-label="GitHub">Github</a>
+                </nav>
+              </div>
+            </header>
 
       <main className="resume-main">
         <section className="container">
@@ -155,8 +158,8 @@ export default function Resume() {
             <section className="resume-section">
               <h2>Volunteer</h2>
               <ul>
-                <li><strong>Etgarim</strong> - Supported athletes with disabilities in adaptive sports, honing teamwork skills. 01/2020–09/2021</li>
-                <li><strong>Scouts</strong> - Guided youth with special needs, organized camps &amp; skill workshops. 09/2014–07/2016</li>
+                <li><strong>Etgarim</strong> - Supported athletes with disabilities in adaptive sports, honing teamwork skills.  -  01/2020–09/2021</li>
+                <li><strong>Scouts</strong> - Guided youth with special needs, organized camps &amp; skill workshops. -  09/2014–07/2016</li>
               </ul>
             </section>
 

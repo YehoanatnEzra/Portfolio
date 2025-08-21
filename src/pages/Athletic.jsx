@@ -96,8 +96,11 @@ export default function Athletic() {
           <Link className="brand" to="/" aria-label="Back to home">Back</Link>
           <nav className="nav-links">
             <a href="tel:0546473490" aria-label="Call Yehonatan">(+972) 054-647-3490</a>
+            <span className="sep">•</span>
             <a href="mailto:yonzra12@gmail.com" aria-label="Email Yehonatan">yonzra12@gmail.com</a>
+            <span className="sep">•</span>
             <a href="https://www.linkedin.com/in/yehonatanezra/" aria-label="LinkedIn">LinkedIn</a>
+            <span className="sep">•</span>
             <a href="https://github.com/YehoanatnEzra/" aria-label="GitHub">Github</a>
           </nav>
         </div>
