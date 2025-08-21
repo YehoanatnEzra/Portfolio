@@ -1,6 +1,8 @@
 // src/pages/Projects.jsx
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { GlowingEffect } from '../components/ui/GlowingEffect';
+import { LampHeader, LampTitle } from '../components/ui/LampHeader';
 
 /** Projects data
  *  - Added `type: 'Hackathon'` category
@@ -225,7 +227,6 @@ export default function Projects() {
     return () => html.setAttribute('data-theme', prev || 'light');
   }, []);
 
-  const [query, setQuery] = useState('');
   const [active, setActive] = useState(new Set(LANGUAGE_TAGS));
   const [types, setTypes] = useState(new Set(TYPE_TAGS)); // all selected by default
   const [selected, setSelected] = useState(null); // modal state
@@ -248,16 +249,14 @@ export default function Projects() {
     });
   }
 
-  /** Combined filtering: text + language tags + type tags */
+  /** Combined filtering: language tags + type tags */
   const filtered = useMemo(() => {
-    const text = query.toLowerCase().trim();
     return PROJECTS.filter(p => {
-      const txtOk = !text || (p.title + ' ' + p.description).toLowerCase().includes(text);
       const langOk = active.size === 0 || [...active].some(tag => p.tags.includes(tag));
       const typeOk = types.size === 0 || types.has(p.type);
-      return txtOk && langOk && typeOk;
+      return langOk && typeOk;
     });
-  }, [query, active, types]);
+  }, [active, types]);
 
   // Close modal on ESC
   useEffect(() => {
@@ -283,66 +282,67 @@ export default function Projects() {
         </div>
       </header>
 
-      <main className="container">
-        <h1>My personal and academic Projects</h1>
-        <p className="muted">
-          I have developed a range of projects, from academic work to personal initiatives, each showcasing my curiosity and technical skills.
+      {/* Lamp Effect Header */}
+      <LampHeader>
+        <LampTitle>
+          My Projects
+        </LampTitle>
+        <p className="lamp-subtitle">
+          I have developed a range of projects, from academic work to personal initiatives, 
+          each showcasing my <span className="highlight">curiosity</span> and <span className="highlight">technical skills</span>.
         </p>
+      </LampHeader>
+
+      <main className="container">
 
         <div className="toolbar">
-          {/* Search */}
-          <div className="search">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.6" />
-            </svg>
-            <input
-              type="search"
-              placeholder="Search projects by name or description…"
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-            />
-          </div>
+          {/* Two-row layout: Main project types, secondary technologies */}
+          <div className="filters-container">
+            {/* Primary row - Project Types (larger, prominent) */}
+            <div className="filter-section">
+              <div className="filters filters--primary" aria-label="Project type filters">
+                {TYPE_TAGS.map(t => (
+                  <button
+                    key={t}
+                    type="button"
+                   className={
+                              `chip chip--type chip--primary ` +
+                              (t === 'Academic' ? 'is-academic ' : t === 'Personal' ? 'is-personal ' : 'is-hackathon ') +
+                              (types.has(t) ? 'active' : '')
+                            }
 
-          {/* Language chips */}
-          <div className="filters" aria-label="Language filters">
-            {LANGUAGE_TAGS.map(t => (
-              <button
-                key={t}
-                type="button"
-                className={'chip chip--lang ' + (active.has(t) ? 'active' : '')}
-                aria-pressed={active.has(t) ? 'true' : 'false'}
-                onClick={() => toggleTag(t)}
-              >
-                {t}
-              </button>
-            ))}
-          </div>
+                    aria-pressed={types.has(t) ? 'true' : 'false'}
+                    onClick={() => toggleType(t)}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-          {/* Type chips */}
-          <div className="filters" aria-label="Type filters">
-            {TYPE_TAGS.map(t => (
-              <button
-                key={t}
-                type="button"
-               className={
-                          `chip chip--type ` +
-                          (t === 'Academic' ? 'is-academic ' : t === 'Personal' ? 'is-personal ' : 'is-hackathon ') +
-                          (types.has(t) ? 'active' : '')
-                        }
-
-                aria-pressed={types.has(t) ? 'true' : 'false'}
-                onClick={() => toggleType(t)}
-              >
-                {t}
-              </button>
-            ))}
+            {/* Secondary row - Technology Tags (smaller, subtle) */}
+            <div className="filter-section">
+              <div className="filters filters--secondary" aria-label="Technology filters">
+                {LANGUAGE_TAGS.map(t => (
+                  <button
+                    key={t}
+                    type="button"
+                    className={'chip chip--lang chip--secondary ' + (active.has(t) ? 'active' : '')}
+                    aria-pressed={active.has(t) ? 'true' : 'false'}
+                    onClick={() => toggleTag(t)}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
         <div id="grid" className="grid" aria-live="polite">
           {filtered.map(p => (
-            <article className="card" key={p.title}>
+            <article className="card glow-card" key={p.title}>
+              <GlowingEffect />
               <div className={`thumb ${p.img ? '' : 'fallback'}`}>
                 <img
                   src={p.img || 'https://picsum.photos/seed/placeholder/1200/800'}

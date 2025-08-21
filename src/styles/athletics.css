@@ -78,3 +78,158 @@
 .hero-inner .about h1 { -webkit-user-select: none; user-select: none; background: transparent !important; }
 .hero-inner .about h1::selection { background: transparent; color: inherit; }
 .hero-inner .about h1::-moz-selection { background: transparent; color: inherit; }
+
+/* Mobile-specific enhancements for Athletics */
+@media (max-width: 768px) {
+  .hero-wrap {
+    height: 80vh;
+    min-height: 480px;
+  }
+  
+  .team-section {
+    height: 80vh;
+    min-height: 480px;
+    margin-top: 1rem;
+  }
+  
+  .hero-inner,
+  .team-inner {
+    padding: 1.5rem 1rem;
+    padding-bottom: 6vh;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hero-inner .about,
+  .team-inner .about {
+    max-width: 100%;
+  }
+  
+  .hero-inner .about h1 {
+    font-size: 2.25rem !important;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  .team-inner .about h2 {
+    font-size: 1.875rem !important;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+  
+  .hero-inner .about p,
+  .team-inner .about p {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+  
+  .records-inner {
+    padding: 3rem 1.5rem;
+  }
+  
+  .records-inner h2 {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .records-inner ul {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+  
+  .dots {
+    bottom: 1rem;
+    gap: 0.5rem;
+  }
+  
+  .dot {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-wrap {
+    height: 75vh;
+    min-height: 400px;
+  }
+  
+  .team-section {
+    height: 75vh;
+    min-height: 400px;
+  }
+  
+  .hero-inner,
+  .team-inner {
+    padding: 1rem 0.75rem;
+    padding-bottom: 5vh;
+  }
+  
+  .hero-inner .about h1 {
+    font-size: 2rem !important;
+    margin-bottom: 0.75rem;
+  }
+  
+  .team-inner .about h2 {
+    font-size: 1.625rem !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-inner .about p,
+  .team-inner .about p {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  
+  .records-inner {
+    padding: 2.5rem 1rem;
+  }
+  
+  .records-inner h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .records-inner ul {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .dots {
+    bottom: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-wrap,
+  .team-section {
+    height: 70vh;
+    min-height: 350px;
+  }
+  
+  .hero-inner,
+  .team-inner {
+    padding: 0.75rem 0.5rem;
+    padding-bottom: 4vh;
+  }
+  
+  .hero-inner .about h1 {
+    font-size: 1.75rem !important;
+  }
+  
+  .team-inner .about h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .records-inner {
+    padding: 2rem 0.75rem;
+  }
+  
+  .records-inner h2 {
+    font-size: 1.5rem;
+  }
+  
+  .records-inner ul {
+    font-size: 0.9rem;
+  }
+}

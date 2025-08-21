@@ -4,13 +4,106 @@
 
 .toolbar{
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 18px;
+  margin-top: -2rem;
 }
 
+/* Enhanced Search Container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.25rem;
+  z-index: 2;
+  color: var(--muted);
+  transition: color 0.3s ease;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 3.5rem 1rem 3.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 0 0 4px rgba(124, 58, 237, 0.1),
+    0 10px 25px -5px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.search-wrapper:hover .search-icon,
+.search-input:focus ~ .search-icon {
+  color: var(--accent);
+}
+
+.search-clear {
+  position: absolute;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.search-clear:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.search-clear:active {
+  transform: scale(0.95);
+}
+
+/* Legacy search styles - keeping for any remaining references */
 .search{
   flex: 1 1 280px;
   display: flex;
@@ -31,28 +124,240 @@
   font-size: 14px;
 }
 
-.filters{
+/* Two-row filter layout with hierarchy */
+.filters-container {
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 0;
 }
 
-/* Chips (language filters) */
-.chip{
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid color-mix(in oklab, var(--text), transparent 85%);
-  background: var(--panel);
+.filter-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Filter groups */
+.filters{
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filters--primary {
+  gap: 1rem;
+}
+
+.filters--secondary {
+  gap: 0.5rem;
+}
+
+/* Primary chips (Project Types) - Larger and prominent */
+.chip--primary {
+  padding: 1rem 2rem;
+  border-radius: 2.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
   color: var(--text);
   cursor: pointer;
   user-select: none;
-  transition: .2s ease;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.025em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.chip.active{
+.chip--primary:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.chip--primary.active {
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color: #fff;
   border-color: transparent;
+  box-shadow: 
+    0 6px 16px rgba(124, 58, 237, 0.3),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chip--primary.active:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 8px 24px rgba(124, 58, 237, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Secondary chips (Technologies) - Smaller and subtle */
+.chip--secondary {
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+  font-size: 0.85rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.chip--secondary:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 3px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.chip--secondary.active {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(6, 182, 212, 0.8));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 
+    0 3px 8px rgba(124, 58, 237, 0.2),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.chip--secondary.active:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 
+    0 4px 12px rgba(124, 58, 237, 0.25),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design for mobile */
+@media (max-width: 768px) {
+  .toolbar {
+    margin-top: -3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .filters-container {
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+  
+  .chip--primary {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.95rem;
+    border-radius: 1.8rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+  }
+  
+  .chip--secondary {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
+    border-radius: 1.25rem;
+  }
+  
+  .filters--primary {
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .filters--secondary {
+    gap: 0.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar {
+    padding: 0 0.5rem;
+    margin-top: -3.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .filters-container {
+    gap: 0.625rem;
+    padding: 0;
+  }
+  
+  .chip--primary {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: center;
+  }
+  
+  .chip--secondary {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .filters--primary {
+    gap: 0.4rem;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .filters--secondary {
+    gap: 0.35rem;
+  }
+  
+  /* Ensure chips don't get too small on very small screens */
+  .chip--primary:hover,
+  .chip--secondary:hover {
+    transform: translateY(-2px);
+  }
+  
+  .chip--primary.active:hover {
+    transform: translateY(-2px) scale(1.02);
+  }
+  
+  .chip--secondary.active:hover {
+    transform: translateY(-1px) scale(1.01);
+  }
+}
+
+/* Extra small screens (narrow phones) */
+@media (max-width: 360px) {
+  .chip--primary {
+    padding: 0.55rem 0.6rem;
+    font-size: 0.8rem;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  
+  .chip--secondary {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.7rem;
+  }
+  
+  .filters--primary {
+    gap: 0.3rem;
+  }
+  
+  .filters--secondary {
+    gap: 0.3rem;
+  }
 }
 
 /* Muted helper text */

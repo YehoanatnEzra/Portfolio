@@ -22,8 +22,8 @@ export default function Home() {
 
   /* Add body overlay class only on Home */
   useEffect(() => {
-    document.body.classList.add("home-has-bg");
-    return () => document.body.classList.remove("home-has-bg");
+    document.body.classList.add("home-has-bg", "home-page");
+    return () => document.body.classList.remove("home-has-bg", "home-page");
   }, []);
 
   /** Background carousel (body background) */
@@ -56,6 +56,40 @@ export default function Home() {
   const scrollByAmount = 420; // px per click
   const scrollLeft = () => skillsRef.current?.scrollBy({ left: -scrollByAmount, behavior: 'smooth' });
   const scrollRight = () => skillsRef.current?.scrollBy({ left: scrollByAmount, behavior: 'smooth' });
+
+  /** Create temporary glow effect on button click */
+  const createClickGlow = (e) => {
+    const button = e.currentTarget;
+    
+    // Method 1: CSS class approach (more reliable)
+    button.classList.add('click-burst');
+    setTimeout(() => button.classList.remove('click-burst'), 800);
+    
+    // Debug: temporary background change to confirm it's working
+    const originalBg = button.style.background;
+    button.style.background = 'rgba(6,182,212,0.8)';
+    setTimeout(() => {
+      button.style.background = originalBg;
+    }, 200);
+    
+    // Method 2: DOM element approach (backup)
+    const existingGlow = button.querySelector('.click-glow');
+    if (existingGlow) existingGlow.remove();
+    
+    const glow = document.createElement('div');
+    glow.className = 'click-glow';
+    glow.style.cssText = `
+      position: absolute; inset: -4px; border-radius: inherit; pointer-events: none; z-index: -1;
+      background: radial-gradient(circle at 50% 50%, rgba(6,182,212,0.8), rgba(139,92,246,0.6) 40%, transparent 70%);
+      animation: clickGlowBurst 0.8s ease-out forwards;
+      box-shadow: 0 0 20px rgba(6,182,212,0.5);
+    `;
+    button.style.position = 'relative';
+    button.style.overflow = 'visible';
+    button.appendChild(glow);
+    
+    setTimeout(() => glow.remove(), 800);
+  };
 
   /** Shared inline styles (keep cards aligned & symmetric) */
   const cardInner = { display: 'flex', flexDirection: 'column', gap: 8, height: '100%' };
@@ -121,9 +155,9 @@ export default function Home() {
       <section className="hero">
         {/* Background controls */}
         <button className="bg-btn left" aria-label="Previous background"
-          onClick={() => setBgIndex(i => (i - 1 + images.length) % images.length)}>‹</button>
+          onClick={(e) => { setBgIndex(i => (i - 1 + images.length) % images.length); createClickGlow(e); }}>‹</button>
         <button className="bg-btn right" aria-label="Next background"
-          onClick={() => setBgIndex(i => (i + 1) % images.length)}>›</button>
+          onClick={(e) => { setBgIndex(i => (i + 1) % images.length); createClickGlow(e); }}>›</button>
 
         <div className="bg-credit">
           These photos were taken during my exchange semester at UBC, while hiking in the Rockies.
@@ -245,10 +279,12 @@ export default function Home() {
         <section id="skills" aria-label="Technical Skills">
           <h2 className="section-title">Technical Skills</h2>
           <div className="scroll-wrap">
-            <button className="scroll-btn left" aria-label="Scroll left" onClick={scrollLeft}>‹</button>
+            <button className="scroll-btn left" aria-label="Scroll left" 
+              onClick={(e) => { scrollLeft(); createClickGlow(e); }}>‹</button>
             <div className="skill-track" ref={skillsRef}>
               {/* Languages */}
-              <article className="skill-card">
+              <article className="skill-card glow-card">
+                <GlowingEffect />
                 <h3>Languages</h3>
                 <ul>
                   <li>Python</li>
@@ -261,7 +297,8 @@ export default function Home() {
               </article>
 
               {/* CS Fundamentals */}
-              <article className="skill-card">
+              <article className="skill-card glow-card">
+                <GlowingEffect />
                 <h3>CS Fundamentals</h3>
                 <ul>
                   <li>Data structures, algorithms</li>
@@ -272,7 +309,8 @@ export default function Home() {
               </article>
 
               {/* Network & Cybersecurity */}
-              <article className="skill-card">
+              <article className="skill-card glow-card">
+                <GlowingEffect />
                 <h3>Network & Cybersecurity</h3>
                 <ul>
                   <li>AES-128/256, ChaCha20, RSA, ECC</li>
@@ -284,7 +322,8 @@ export default function Home() {
               </article>
 
               {/* Machine Learning */}
-              <article className="skill-card">
+              <article className="skill-card glow-card">
+                <GlowingEffect />
                 <h3>Machine Learning</h3>
                 <ul>
                   <li>scikit-learn, NumPy, pandas, matplotlib</li>
@@ -295,7 +334,8 @@ export default function Home() {
               </article>
 
               {/* Operating Systems */}
-              <article className="skill-card">
+              <article className="skill-card glow-card">
+                <GlowingEffect />
                 <h3>Operating Systems</h3>
                 <ul>
                   <li>Threads, Processes, Scheduling</li>
@@ -306,7 +346,8 @@ export default function Home() {
                 </ul>
               </article>
             </div>
-            <button className="scroll-btn right" aria-label="Scroll right" onClick={scrollRight}>›</button>
+            <button className="scroll-btn right" aria-label="Scroll right" 
+              onClick={(e) => { scrollRight(); createClickGlow(e); }}>›</button>
           </div>
         </section>
       </main>

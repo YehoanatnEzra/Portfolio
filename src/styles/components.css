@@ -35,9 +35,12 @@
 
 /* Glowing effect used by cards */
 .glow-card,
-.qcard { position: relative; overflow: hidden; }
-.qcard .glowing-effect { z-index: 0; }
-.qcard > * { position: relative; z-index: 1; }
+.qcard,
+.skill-card { position: relative; overflow: hidden; }
+.qcard .glowing-effect,
+.skill-card .glowing-effect { z-index: 0; }
+.qcard > *,
+.skill-card > * { position: relative; z-index: 1; }
 .glow-card { isolation: isolate; }
 .glow-card .glowing-effect { z-index: 0; }
 .glow-card > * { position: relative; z-index: 1; }
@@ -118,3 +121,119 @@
 
 /* ensure qcard content is above the glow */
 .qcard > *{ position: relative; z-index: 1; }
+
+/* Click burst effect using pseudo-element (more reliable) */
+.click-burst {
+  position: relative;
+}
+
+.click-burst::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(6,182,212,0.6) 0%, rgba(139,92,246,0.4) 50%, transparent 80%);
+  animation: clickBurstEffect 0.8s ease-out forwards;
+  z-index: -1;
+}
+
+@keyframes clickBurstEffect {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.3); 
+    filter: blur(0px);
+  }
+  40% { 
+    opacity: 1; 
+    transform: scale(1.1); 
+    filter: blur(1px);
+  }
+  100% { 
+    opacity: 0; 
+    transform: scale(2.0); 
+    filter: blur(6px);
+  }
+}
+
+/* Click glow animation - more visible burst effect */
+@keyframes clickGlowBurst {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.5); 
+    filter: blur(0px);
+  }
+  30% { 
+    opacity: 1; 
+    transform: scale(1.0); 
+    filter: blur(2px);
+  }
+  100% { 
+    opacity: 0; 
+    transform: scale(1.8); 
+    filter: blur(8px);
+  }
+}
+
+/* Fallback animation */
+@keyframes clickGlowFade {
+  0% { opacity: 1; transform: scale(0.8); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1.3); }
+}
+
+/* Mobile-specific component enhancements */
+@media (max-width: 768px) {
+  .btn,
+  .btn-secondary {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    gap: 0.5rem;
+  }
+  
+  .btn:hover,
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+  }
+  
+  /* Reduce glow effects intensity on mobile for performance */
+  .glowing-effect {
+    opacity: 0.6;
+  }
+  
+  /* Make click effects more subtle on touch devices */
+  @media (hover: none) {
+    .glowing-effect {
+      opacity: 0.4;
+    }
+    
+    .btn:hover,
+    .btn-secondary:hover {
+      transform: none;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .btn,
+  .btn-secondary {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.85rem;
+    border-radius: 0.75rem;
+  }
+  
+  .actions {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .btn,
+  .btn-secondary {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+    border-radius: 0.5rem;
+  }
+}
