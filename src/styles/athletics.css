@@ -1,0 +1,80 @@
+/* =========================================================
+   Athletics: hero & team full-bleed carousels + records
+   ========================================================= */
+
+/* HERO */
+.hero-wrap { position: relative; height: 90vh; min-height: 560px; overflow: hidden; }
+.hero-slides { position: absolute; inset: 0; }
+.hero-slide {
+  position: absolute; inset: 0; background: center/cover no-repeat;
+  opacity: 0; transition: opacity 1s ease; filter: brightness(.9); will-change: transform, opacity;
+}
+.hero-slide.active { opacity: 1; animation: zoomSlow 8s ease-in-out forwards; }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.4), rgba(0,0,0,.3) 40%, rgba(0,0,0,.5));
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative; z-index: 2; height: 100%;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 28px 18px; padding-bottom: 8vh; text-align: left;
+}
+.hero-inner .about { max-width: 780px; }
+.hero-inner .about p { margin: 0; text-indent: 0; line-height: 1.45; }
+
+/* TEAM */
+.team-section { position: relative; height: 90vh; min-height: 560px; overflow: hidden; margin-top: 22px; }
+.team-bg { position: absolute; inset: 0; }
+.team-bg .frame {
+  position: absolute; inset: 0; background: center/cover no-repeat;
+  opacity: 0; transition: opacity 1s ease; filter: brightness(.88); will-change: transform, opacity;
+}
+.team-bg .frame.active { opacity: 1; animation: zoomSlow 8s ease-in-out forwards; }
+.team-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.45)); }
+.team-inner {
+  position: relative; z-index: 2; height: 100%;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 28px 18px; padding-bottom: 8vh; text-align: left;
+}
+.team-inner .about { max-width: 780px; }
+.team-inner .about p { margin: 0; text-indent: 0; line-height: 1.45; }
+
+/* Dots */
+.dots {
+  position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: 16px; display: flex; gap: 8px; z-index: 3;
+}
+.dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.6); border: none; cursor: pointer; }
+.dot.active { background: #fff; }
+
+/* Zoom animation (disabled by reduced motion) */
+@keyframes zoomSlow { from { transform: scale(1.03) } to { transform: scale(1.07) } }
+@media (hover: none) {
+  .hero-slide.active, .team-bg .frame.active { animation: zoomSlowAlt 14s ease-in-out infinite alternate; }
+  @keyframes zoomSlowAlt { from { transform: scale(1.02) } to { transform: scale(1.06) } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide, .team-bg .frame { animation: none !important; transition: none !important; }
+}
+
+/* Records section */
+.records { position: relative; }
+.records-bg {
+  position: absolute; inset: 0; background: url('/photos/PB.jpg') center/cover no-repeat;
+  filter: brightness(.4); z-index: 0;
+}
+.records-inner { position: relative; z-index: 1; color: #fff; text-align: center; padding: 80px 20px; }
+.records-inner h2 { font-size: 36px; margin-bottom: 20px; }
+.records-inner ul { list-style: none; padding: 0; margin: 0; font-size: 20px; line-height: 1.8; }
+
+/* White text & subtle shadows for hero/team copy */
+.hero-inner .about h1,
+.hero-inner .about p,
+.team-inner .about h2,
+.team-inner .about p { color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+
+/* Remove blue selection highlight from the hero heading */
+.hero-inner .about h1 { -webkit-user-select: none; user-select: none; background: transparent !important; }
+.hero-inner .about h1::selection { background: transparent; color: inherit; }
+.hero-inner .about h1::-moz-selection { background: transparent; color: inherit; }

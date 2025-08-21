@@ -1,0 +1,120 @@
+/* =========================================================
+   Components: buttons, glowing effects, cards
+   ========================================================= */
+
+/* Buttons used for Code / More details */
+.btn,
+.btn-secondary{
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+/* Primary button (e.g., More details) */
+.btn{
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border: none;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+.btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.28);
+}
+
+.btn-secondary:hover{
+  border-color: color-mix(in oklab, var(--text), transparent 65%);
+  background: color-mix(in oklab, var(--text), transparent 90%);
+}
+
+/* Glowing effect used by cards */
+.glow-card,
+.qcard { position: relative; overflow: hidden; }
+.qcard .glowing-effect { z-index: 0; }
+.qcard > * { position: relative; z-index: 1; }
+.glow-card { isolation: isolate; }
+.glow-card .glowing-effect { z-index: 0; }
+.glow-card > * { position: relative; z-index: 1; }
+
+.glowing-effect{
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(var(--ge-blur, 0px));
+}
+.glowing-effect::after{
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--ge-border, 1px));
+  border-radius: inherit;
+  border: var(--ge-border, 1px) solid transparent;
+  background:
+    radial-gradient(circle at var(--ge-gx,50%) var(--ge-gy,50%), rgba(221,123,187,0.65) 0%, rgba(221,123,187,0) 30%),
+    radial-gradient(circle at calc(var(--ge-gx,50%) - 10%) calc(var(--ge-gy,50%) - 10%), rgba(215,159,30,0.45) 0%, rgba(215,159,30,0) 25%),
+    repeating-conic-gradient(from 236.84deg at 50% 50%,
+      #dd7bbb 0%,
+      #d79f1e calc(25% / var(--ge-times, 5)),
+      #5a922c calc(50% / var(--ge-times, 5)),
+      #4c7894 calc(75% / var(--ge-times, 5)),
+      #dd7bbb calc(100% / var(--ge-times, 5))
+    );
+  background-attachment: local;
+  background-position: center;
+  opacity: var(--ge-active, 0);
+  transition: opacity .18s ease, transform .3s ease;
+  -webkit-mask-clip: padding-box, border-box;
+  mask-clip: padding-box, border-box;
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(#0000, #0000),
+    conic-gradient(
+      from calc((var(--ge-start, 0) - var(--ge-spread, 40)) * 1deg),
+      transparent 0deg,
+      #fff 1deg,
+      transparent calc(var(--ge-spread, 40) * 2deg)
+    );
+  mask-image: linear-gradient(#0000, #0000),
+    conic-gradient(
+      from calc((var(--ge-start, 0) - var(--ge-spread, 40)) * 1deg),
+      transparent 0deg,
+      #fff 1deg,
+      transparent calc(var(--ge-spread, 40) * 2deg)
+    );
+}
+
+/* GlowingEffect (alternative/extended styles) */
+.glowing-effect::after{
+  content: ""; position: absolute; inset: calc(-1 * var(--ge-border, 1px)); border-radius: inherit;
+  border: var(--ge-border, 1px) solid transparent;
+  background:
+    radial-gradient(circle, #dd7bbb 10%, #dd7bbb00 20%),
+    radial-gradient(circle at 40% 40%, #d79f1e 5%, #d79f1e00 15%),
+    radial-gradient(circle at 60% 60%, #5a922c 10%, #5a922c00 20%),
+    radial-gradient(circle at 40% 60%, #4c7894 10%, #4c789400 20%),
+    repeating-conic-gradient(
+      from 236.84deg at 50% 50%,
+      #dd7bbb 0%,
+      #d79f1e calc(25% / var(--ge-times, 5)),
+      #5a922c calc(50% / var(--ge-times, 5)),
+      #4c7894 calc(75% / var(--ge-times, 5)),
+      #dd7bbb calc(100% / var(--ge-times, 5))
+    );
+  background-attachment: local; background-position: center; opacity: var(--ge-active, 0); transition: opacity .18s ease, transform .3s ease;
+  -webkit-mask-clip: padding-box, border-box; mask-clip: padding-box, border-box;
+  -webkit-mask-composite: source-in; mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(#0000, #0000),
+    conic-gradient(from calc((var(--ge-start, 0) - var(--ge-spread, 20)) * 1deg), transparent 0deg, #fff, transparent calc(var(--ge-spread, 20) * 2deg));
+  mask-image: linear-gradient(#0000, #0000),
+    conic-gradient(from calc((var(--ge-start, 0) - var(--ge-spread, 20)) * 1deg), transparent 0deg, #fff, transparent calc(var(--ge-spread, 20) * 2deg));
+}
+
+/* ensure qcard content is above the glow */
+.qcard > *{ position: relative; z-index: 1; }

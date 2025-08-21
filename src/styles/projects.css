@@ -1,0 +1,220 @@
+/* =========================================================
+   Projects page: toolbar, chips, grid, cards, modal
+   ========================================================= */
+
+.toolbar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.search{
+  flex: 1 1 280px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--panel);
+  border: 1px solid color-mix(in oklab, var(--text), transparent 90%);
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+.search input{
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.filters{
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Chips (language filters) */
+.chip{
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--text), transparent 85%);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  transition: .2s ease;
+}
+
+.chip.active{
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-color: transparent;
+}
+
+/* Muted helper text */
+.muted{
+  color: color-mix(in oklab, var(--text), transparent 40%);
+  font-size: 18px;
+  text-shadow: 0 1px 6px rgba(0,0,0,.45);
+}
+
+/* Grid & cards */
+.grid{
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.card{
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: 1.1fr 1.6fr;
+  background: var(--panel);
+  border: 1px solid color-mix(in oklab, var(--text), transparent 90%);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  min-height: 160px;
+}
+
+/* Left image column */
+.thumb{
+  position: relative;
+  min-height: 160px;
+  background: var(--panel);
+  overflow: hidden;
+}
+.thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease, filter .4s ease;
+}
+.card:hover .thumb img{
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+
+/* Subtle idle motion on touch devices */
+@media (hover: none){
+  .thumb img{ animation: slowZoomCard 10s ease-in-out infinite alternate; }
+}
+@keyframes slowZoomCard { from { transform: scale(1) } to { transform: scale(1.04) } }
+
+/* Desktop: gentle idle motion; pause on hover */
+@media (hover: hover){
+  .thumb img{ animation: slowZoomCard 16s ease-in-out infinite alternate; }
+  .card:hover .thumb img{ animation-play-state: paused; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .thumb img{ animation: none !important; transition: none !important; }
+}
+
+/* Fallback thumbnail background */
+.thumb.fallback{
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--accent-2), transparent 70%), transparent),
+    linear-gradient(180deg, color-mix(in oklab, var(--accent), transparent 70%), transparent);
+}
+
+/* Content area */
+.content{ padding: 16px; }
+
+.card h3{
+  margin: 4px 0 8px;
+  font-size: 20px;
+}
+
+.badge{
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  text-shadow: 0 1px 6px rgba(0,0,0,.35);
+}
+
+.actions{
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+/* Empty state */
+.empty{
+  text-align: center;
+  color: var(--muted);
+  padding: 32px;
+  border: 1px dashed color-mix(in oklab, var(--text), transparent 85%);
+  border-radius: 12px;
+}
+
+/* Modal */
+.modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal[hidden]{ display: none; }
+.modal-content{
+  background: var(--panel);
+  color: var(--text);
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 700px;
+  max-height: 80vh;
+  overflow: auto;
+  box-shadow: var(--shadow);
+}
+.close{
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--text);
+}
+
+/* ===== Distinct chips for Language vs Type ===== */
+.chip--lang.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #fff;
+  border-color: transparent;
+}
+/* Type chips */
+.chip--type.active {
+   background: linear-gradient(135deg, #10b981, #34d399);
+  color: #fff;
+  border-color: transparent;
+}
+.chip--type.is-hackathon.active {
+   background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+/* Badges by type */
+.badge--type {
+  background: linear-gradient(135deg, #a78bfa33, #06b6d433);
+  color: #fff;
+}
+.badge--type.badge--academic,
+.badge--type.badge--personal,
+.badge--type.badge--hackathon {
+  background: linear-gradient(135deg, #10b981, #34d399);
+  color: #fff;
+}

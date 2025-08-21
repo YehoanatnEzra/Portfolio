@@ -1,0 +1,51 @@
+/* =========================================================
+   Header / Navigation
+   ========================================================= */
+header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, .4);
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
+  color: #fff;
+}
+
+.nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.nav a{
+  opacity: .95;
+  text-shadow: 0 1px 6px rgba(0,0,0,.45);
+}
+
+.nav-links{ /* used on Projects header */
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.brand{ font-weight: 800; letter-spacing: .3px; }
+
+/* Topbar and contact inline styles */
+.topbar{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding:6px 0; }
+.topbar .bar{ display:flex; gap:12px; align-items:center; }
+.nav-contacts{ display:flex; gap:12px; align-items:center; font-size:14px; }
+.nav-contacts a{ color:#fff; text-decoration:none; font-weight:600; }
+.nav-contacts a:hover{ opacity:0.9; text-decoration:underline; }
+.contact-inline{ display:flex; gap:10px; align-items:center; }
+.contact-inline .sep{ opacity:0.6; padding:0 6px; }
+
+/* Footer */
+footer{
+  padding: 36px 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+main { padding: 28px 0 48px; }

@@ -1,0 +1,77 @@
+/* =========================================================
+   Design tokens
+   - Edit these to tweak the global look & feel
+   ========================================================= */
+:root {
+  --bg: #0b0c10;
+  --panel: #12141a;
+  --text: #e8ebf1;
+  --muted: #a7b0c0;
+  --accent: #06b6d4;
+  --accent-2: #8b5cf6;
+  --ring: #06b6d455;
+  --shadow: 0 10px 25px rgba(0, 0, 0, .25);
+  --radius: 18px;
+  --container: 1100px;
+}
+
+/* Light theme overrides */
+html[data-theme="light"]{
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --text: #0b1324;
+  --muted: #4b5563;
+  --shadow: 0 10px 25px rgba(2, 6, 23, .08);
+}
+
+/* =========================================================
+   Base / reset
+   ========================================================= */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { min-height: 100%; }
+
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "Segoe UI Emoji";
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Hide scrollbars globally (keeps scrolling via wheel/keys/touch) */
+html, body, * {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img{
+  max-width: 100%;
+  display: block;
+  transition: transform .3s ease, filter .3s ease;
+}
+
+.container{
+  width: min(100% - 32px, var(--container));
+  margin-inline: auto;
+}
+
+/* Focus ring for keyboard users */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}

@@ -1,0 +1,84 @@
+/* =========================================================
+   Resume page
+   ========================================================= */
+.resume-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(135deg, #0a2540, #102c54, #1b3b73, #0d47a1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f0f4ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  background-size: 400% 400%;
+  animation: resumeGradientFlow 18s ease infinite;
+  color: var(--text);
+}
+
+/* ---- Header overrides only inside Resume page ---- */
+.resume-page header{
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(135deg, #0a2540, #102c54, #1b3b73, #0d47a1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f0f4ff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+.resume-page header .nav{ padding: 10px 0; }
+.resume-page header .nav a{
+  color: #f0f4ff; opacity: 1; text-shadow: none; font-weight: 600;
+}
+.resume-page header .nav a:hover{ text-decoration: underline; }
+.resume-page header .sep{ opacity: .65; margin: 0 6px; color: #c5d4f7; }
+
+/* ---- Resume typography spacing ---- */
+.resume-section h2 {
+  margin-top: 28px;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+.resume-section h3 {
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #e0e6f5;
+}
+.resume-section p,
+.resume-section ul {
+  margin-top: 0;
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.see-more, .see-less {
+  color: #4da6ff;
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 6px;
+}
+.see-more:hover, .see-less:hover { text-decoration: underline; }
+
+.courses ul.sublist {
+  margin: 6px 0 0 20px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@keyframes resumeGradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.resume-paper {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
