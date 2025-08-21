@@ -49,6 +49,17 @@ header{
   text-decoration: none !important;
 }
 
+/* Group of primary nav links (Back / Athletic / Resume on Projects page) */
+.brand-group {
+  display: flex;
+  gap: 0.75rem; /* tighter spacing */
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .brand-group { gap: 0.55rem; }
+}
+
 .brand:hover {
   opacity: 1;
 }

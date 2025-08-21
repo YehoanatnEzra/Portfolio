@@ -99,7 +99,11 @@ export default function Athletic() {
     <div>
       <header>
         <div className="container nav">
-          <Link className="brand" to="/" aria-label="Back to home">Back</Link>
+          <div className="brand-group">
+            <Link className="brand" to="/" aria-label="Back to home">Home</Link>
+            <Link className="brand" to="/projects" aria-label="Go to Projects page">Projects</Link>
+            <Link className="brand" to="/resume" aria-label="Go to Resume page">Resume</Link>
+          </div>
           <nav className="nav-links">
             <a href="tel:0546473490" aria-label="Call Yehonatan">054-647-3490</a>
             <span className="sep">•</span>

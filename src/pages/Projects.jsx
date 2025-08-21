@@ -325,7 +325,11 @@ export default function Projects() {
     <div>
       <header>
         <div className="container nav">
-          <Link className="brand" to="/" aria-label="Back to home">Back</Link>
+          <div className="brand-group">
+            <Link className="brand" to="/" aria-label="Back to home">Home</Link>
+            <Link className="brand" to="/athletic" aria-label="Go to Athletic page">Athletic</Link>
+            <Link className="brand" to="/resume" aria-label="Go to Resume page">Resume</Link>
+          </div>
           <nav className="nav-links">
             <a href="tel:0546473490" aria-label="Call Yehonatan">054-647-3490</a>
             <span className="sep">•</span>
@@ -429,12 +433,18 @@ export default function Projects() {
 
 
                 <h3>{p.title}</h3>
-                {/* thread description includes <code> => render safely as HTML snippet */}
-                <p dangerouslySetInnerHTML={{ __html: p.description }} />
+                {/* Description with inline 'See more details' action */}
+                <p className="description">
+                  <span dangerouslySetInnerHTML={{ __html: p.description }} />{' '}
+                  <button
+                    className="text-link inline-details"
+                    onClick={() => setSelected(p)}
+                    aria-label={`See more details about ${p.title}`}
+                  >See more details</button>
+                </p>
 
                 <div className="actions">
                   <a className="btn-secondary" href={p.code} target="_blank" rel="noopener noreferrer">Code</a>
-                  <button className="btn" onClick={() => setSelected(p)}>More details</button>
                 </div>
               </div>
             </article>

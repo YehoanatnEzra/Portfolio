@@ -28,10 +28,54 @@
   box-shadow: 0 10px 24px rgba(0,0,0,.28);
 }
 
-.btn-secondary:hover{
-  border-color: color-mix(in oklab, var(--text), transparent 65%);
-  background: color-mix(in oklab, var(--text), transparent 90%);
+/* Secondary button now matches language chip gradient styling */
+.btn-secondary{
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,.25);
 }
+.btn-secondary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.3);
+  filter: brightness(1.05);
+}
+.btn-secondary:active{
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+/* Text-style action link (replaces 'More details' button) */
+.text-link{
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--accent);
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.text-link::after{ /* underline accent that animates */
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  transform: scaleX(.35);
+  transform-origin: left;
+  transition: transform .3s ease;
+  border-radius: 2px;
+  opacity: .75;
+}
+.text-link:hover::after{ transform: scaleX(1); opacity: 1; }
+.text-link:focus{ outline: 2px solid color-mix(in oklab,var(--accent),transparent 40%); outline-offset: 2px; }
+.text-link:active{ transform: translateY(1px); }
+.text-link:hover{ color: var(--accent-2); }
 
 /* Glowing effect used by cards */
 .glow-card,
