@@ -54,10 +54,10 @@ const PROJECTS = [
     title: 'Job Scanner',
     type: 'Personal',
     tags: ['Python', 'HTML'],
-    description: 'A job aggregation tool that pulls listings from multiple APIs, including a non-documented Airtable source. Parsed hidden URLs and dynamic headers from HTML and JavaScript to access raw data.',
+    description: 'A full-stack job aggregation tool that pulls listings from multiple APIs, including a non-documented Airtable source. Parsed hidden URLs and dynamic headers from HTML and JavaScript to access raw data.',
     code: 'https://github.com/YehoanatnEzra/Job_Scanner',
     img: `${import.meta.env.BASE_URL}photos/projects/hackaton.jpg`,
-    details:`Implemented the Job Scanner module - a job search engine that aggregates listings from multiple public APIs and a hidden Airtable source.
+    details:`A full-stack project I built end‑to‑end (Python backend + React frontend). This module is a job search engine that aggregates listings from multiple public APIs and a hidden Airtable source.
 
             Designed the logic to query, normalize, and filter job data, including handling dynamic headers and hidden endpoints.
 

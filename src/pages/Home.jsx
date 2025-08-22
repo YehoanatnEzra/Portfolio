@@ -177,6 +177,21 @@ export default function Home() {
           aria-hidden="true"
         />
       )}
+      {/* Single background cycle button (top-right) */}
+      <button
+        className="bg-btn bg-cycle"
+        aria-label="Change background photo"
+        onClick={(e) => {
+          // Shift+Click goes backwards, normal click forward
+          if (e.shiftKey) {
+            setBgIndex(i => (i - 1 + images.length) % images.length);
+          } else {
+            setBgIndex(i => (i + 1) % images.length);
+          }
+          createClickGlow(e);
+        }}
+        title="Click: next photo | Shift+Click: previous photo"
+      >›</button>
       {/* Header */}
       <header>
         <div className="container nav">
@@ -213,12 +228,6 @@ export default function Home() {
 
       {/* Hero */}
   <section className="hero">
-        {/* Background controls */}
-        <button className="bg-btn left" aria-label="Previous background"
-          onClick={(e) => { setBgIndex(i => (i - 1 + images.length) % images.length); createClickGlow(e); }}>‹</button>
-        <button className="bg-btn right" aria-label="Next background"
-          onClick={(e) => { setBgIndex(i => (i + 1) % images.length); createClickGlow(e); }}>›</button>
-
         <div className="inner">
           <div className="headline">
             <div className="headline-title">
@@ -348,7 +357,7 @@ export default function Home() {
                   <li>Java</li>
                   <li>Bash</li>
                   <li>SQL</li>
-                  <li>HTML, CSS, JavaScript (basic)</li>
+                  <li>HTML, CSS, JavaScript</li>
                 </ul>
               </article>
 
