@@ -55,6 +55,13 @@
   text-align: center;
 }
 
+/* Slight upward nudge + tiny font bump for tagline on mobile */
+@media (max-width: 600px){
+  .headline h1 { margin-bottom: 2px; }
+  .tagline { margin-top: -16px; font-size: 24px; }
+  .headline-title img { width: 96px; height: 96px; }
+}
+
 .about h2{
   font-size: 28px;
   margin: 0 0 12px;
@@ -136,7 +143,7 @@
 /* Single background cycle button (Home) */
 .bg-btn.bg-cycle {
   position: fixed;
-  top: 60px; /* sits just under the topbar */
+  top: 96px; /* further below topbar on desktop */
   right: 18px;
   width: 40px; height: 40px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.18);
   display: inline-flex; align-items: center; justify-content: center;
@@ -152,7 +159,7 @@
 .bg-btn.bg-cycle:active { transform: translateY(0) scale(.94); filter: brightness(1.18); }
 .bg-btn.bg-cycle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 @media (max-width: 600px){
-  .bg-btn.bg-cycle { top: 56px; right: 10px; width: 36px; height: 36px; font-size:18px; }
+  .bg-btn.bg-cycle { top: 132px; right: 10px; width: 36px; height: 36px; font-size:18px; }
 }
 
 /* Background credit text */
