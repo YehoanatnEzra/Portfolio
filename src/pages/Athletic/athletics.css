@@ -1,0 +1,135 @@
+/* =========================================================
+   Athletics: hero & team full-bleed carousels + records
+   ========================================================= */
+
+/* Athletic page header - narrower topbar */
+body:has([data-page="athletic"]) header .nav,
+.athletic-page header .nav {
+  padding: 0.5rem 0; /* Reduced from default 1rem to make it narrower */
+}
+
+/* HERO */
+.hero-wrap { position: relative; height: 90vh; min-height: 560px; overflow: hidden; }
+.hero-slides { position: absolute; inset: 0; }
+.hero-slide {
+  position: absolute; inset: 0; background: center/cover no-repeat;
+  opacity: 0; transition: opacity 1s ease; filter: brightness(.9); will-change: transform, opacity;
+}
+.hero-slide.active { opacity: 1; animation: zoomSlow 8s ease-in-out forwards; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.35)); }
+.hero-inner {
+  position: relative; z-index: 2; height: 100%;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 28px 18px; padding-bottom: 9vh; text-align: left;
+}
+.hero-inner .about { max-width: 780px; }
+.hero-inner .about p { margin: 0; text-indent: 0; line-height: 1.45; }
+
+/* DOTS */
+.dots {
+  position: absolute; z-index: 3; inset: auto 0 18px 0; display: flex; gap: 10px; justify-content: center;
+}
+.dot { width: 10px; height: 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.6); background: rgba(255,255,255,.25); cursor: pointer; }
+.dot.active { background: #fff; }
+
+/* TEAM */
+.team-section { position: relative; height: 90vh; min-height: 560px; overflow: hidden; margin-top: 22px; }
+.team-bg { position: absolute; inset: 0; }
+.team-bg .frame {
+  position: absolute; inset: 0; background: center/cover no-repeat;
+  opacity: 0; transition: opacity 1s ease; filter: brightness(.88); will-change: transform, opacity;
+}
+.team-bg .frame.active { opacity: 1; animation: zoomSlow 8s ease-in-out forwards; }
+.team-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.45)); }
+.team-inner {
+  position: relative; z-index: 2; height: 100%;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 28px 18px; padding-bottom: 8vh; text-align: left;
+}
+.team-inner .about { max-width: 780px; }
+.team-inner .about p { margin: 0; text-indent: 0; line-height: 1.45; }
+
+/* White text & subtle shadows for hero/team copy */
+.hero-inner .about h1,
+.hero-inner .about p,
+.team-inner .about h2,
+.team-inner .about p { color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,.35); }
+
+/* Remove blue selection highlight from the hero heading */
+.hero-inner .about h1 { -webkit-user-select: none; user-select: none; background: transparent !important; }
+.hero-inner .about h1::selection { background: transparent; color: inherit; }
+
+/* Records (if used later) */
+.records-wrap { position: relative; padding: 40px 0; }
+.records-inner { position: relative; z-index: 1; color: #fff; text-align: center; padding: 80px 20px; }
+.records-inner h2 { font-size: 36px; margin-bottom: 20px; }
+.records-inner ul { list-style: none; padding: 0; margin: 0; font-size: 20px; line-height: 1.8; }
+
+/* Zoom animation for slides */
+@keyframes zoomSlow {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+/* Responsive tweaks */
+@media (max-width: 980px) {
+  .hero-inner .about,
+  .team-inner .about { max-width: 840px; text-align: center; }
+  .dots { inset: auto 0 12px 0; }
+}
+
+@media (max-width: 640px) {
+  .hero-inner .about p { line-height: 1.5; }
+  .team-inner .about .team-text { font-size: 0.95rem; line-height: 1.45; }
+}
+
+@media (max-width: 480px) {
+  .hero-wrap, .team-section { min-height: 520px; height: 82vh; }
+  .hero-inner { padding-bottom: 8vh; }
+  .team-inner { padding-bottom: 8vh; }
+}
+
+@media (max-width: 360px) {
+  .hero-inner .about h1 { font-size: 1.6rem !important; }
+  .team-inner .about h2 { font-size: 1.4rem !important; }
+  
+  .records-inner {
+    padding: 2rem 0.75rem;
+  }
+  
+  .records-inner h2 {
+    font-size: 1.5rem;
+  }
+  
+  .records-inner ul { font-size: 0.85rem; }
+  .team-inner .about .team-text { font-size: 0.8rem; }
+}
+
+/* =============================================
+   Athletic page: extracted typography from inline styles
+   (kept identical sizes/spacing to preserve visuals)
+   ============================================= */
+.hero-title {
+  font-size: 46px;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.hero-text {
+  font-size: 18px;
+}
+
+.team-title {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.team-text {
+  font-size: 18px;
+}
+
+.team-highlight {
+  font-weight: 700;
+  font-size: 17px;
+  color: #ffd700;
+}

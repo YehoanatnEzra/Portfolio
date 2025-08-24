@@ -1,24 +1,22 @@
-// src/components/ui/GlowingEffect.jsx
 import React, { memo, useCallback, useEffect, useRef } from "react";
 import { animate } from "motion";
 
 /**
- * Lightweight border glow that orbits toward the pointer.
- * Drop it as the FIRST child inside any card with position:relative.
+ * A lightweight glowing border effect that orbits toward the pointer.
+ * Place it as the FIRST child inside any card with position: relative.
  */
-export const GlowingEffect = memo(function GlowingEffect({
-  // strong, visible defaults
-  blur = 10,
-  inactiveZone = 0.6,
-  proximity = 8,
-  spread = 40,
-  borderWidth = 2,
-  movementDuration = 0.9,
-  className = "",
-}) {
+export const GlowingEffect = memo(function GlowingEffect() {
   const ref = useRef(null);
   const last = useRef({ x: 0, y: 0 });
   const raf = useRef(0);
+
+  // Internal constants
+  const blur = 10;
+  const inactiveZone = 0.6;
+  const proximity = 8;
+  const spread = 40;
+  const borderWidth = 2;
+  const movementDuration = 0.9;
 
   const handleMove = useCallback((e) => {
     const el = ref.current;
@@ -28,19 +26,19 @@ export const GlowingEffect = memo(function GlowingEffect({
     raf.current = requestAnimationFrame(() => {
       const { left, top, width, height } = el.getBoundingClientRect();
 
-      // support mouse + touch
+      // Handle mouse and touch
       const getXY = (ev) => {
-        if (!ev) return { x: last.current.x, y: last.current.y };
+        if (!ev) return last.current;
         if (typeof ev.clientX === "number") return { x: ev.clientX, y: ev.clientY };
-        if (ev.touches && ev.touches[0]) return { x: ev.touches[0].clientX, y: ev.touches[0].clientY };
-        return { x: last.current.x, y: last.current.y };
+        if (ev.touches?.[0]) return { x: ev.touches[0].clientX, y: ev.touches[0].clientY };
+        return last.current;
       };
 
       const { x: mx, y: my } = getXY(e);
       if (e) last.current = { x: mx, y: my };
 
-      const cx = left + width * 0.5;
-      const cy = top + height * 0.5;
+      const cx = left + width / 2;
+      const cy = top + height / 2;
       const dist = Math.hypot(mx - cx, my - cy);
       const inactiveR = 0.5 * Math.min(width, height) * inactiveZone;
 
@@ -57,7 +55,7 @@ export const GlowingEffect = memo(function GlowingEffect({
 
       el.style.setProperty("--ge-active", inside ? "1" : "0");
 
-      // gradient focal point in %
+      // Gradient focal point in %
       const gx = Math.max(0, Math.min(100, ((mx - left) / width) * 100));
       const gy = Math.max(0, Math.min(100, ((my - top) / height) * 100));
       el.style.setProperty("--ge-gx", `${gx}%`);
@@ -75,7 +73,7 @@ export const GlowingEffect = memo(function GlowingEffect({
         onUpdate: (v) => el.style.setProperty("--ge-start", String(v)),
       });
     });
-  }, [inactiveZone, proximity, movementDuration]);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => handleMove();
@@ -97,7 +95,7 @@ export const GlowingEffect = memo(function GlowingEffect({
   return (
     <div
       ref={ref}
-      className={`glowing-effect ${className}`}
+      className="glowing-effect"
       style={{
         "--ge-blur": `${blur}px`,
         "--ge-spread": spread,

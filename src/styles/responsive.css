@@ -1,73 +1,41 @@
-/* =========================================================
-   Responsive Design - Mobile-First Approach
-   ========================================================= */
 
-/* Large screens and down */
+
+/* ≥1200px down */
 @media (max-width: 1200px) {
-  .container {
-    width: min(100% - 2rem, var(--container));
-  }
-  
-  .hero .inner {
-    padding: 4rem 2rem 2rem;
-  }
+  .container { width: min(100% - 2rem, var(--container)); }
+  .hero .inner { padding: 4rem 2rem 2rem; } /* same spacing */
 }
 
-/* Tablet and down */
+/* ≤980px (tablet and down) */
 @media (max-width: 980px) {
-  .hero .inner { 
-    flex-direction: column; 
-    text-align: center; 
-    align-items: center; 
+  .hero .inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
     gap: 2rem;
     padding: 3rem 1.5rem 2rem;
   }
-  
-  .qcard { 
-    grid-column: span 12; 
-  }
-  
-  .card { 
-    grid-template-columns: 1fr; 
-  }
-  
-  .headline h1 {
-    font-size: clamp(2.5rem, 8vw, 4rem);
-  }
+
+  .qcard { grid-column: span 12; }
+  .card  { grid-template-columns: 1fr; }
+
+  .headline h1 { font-size: clamp(2.5rem, 8vw, 4rem); }
 }
 
-/* Mobile landscape and down */
+/* ≤768px (mobile landscape) */
 @media (max-width: 768px) {
-  .container {
-    width: min(100% - 1.5rem, var(--container));
-  }
-  
-  .hero {
-    min-height: 80vh;
-  }
-  
-  .hero .inner {
-    padding: 2rem 1rem 1.5rem;
-    gap: 1.5rem;
-  }
-  
-  .headline p {
-    font-size: 1.125rem;
-    line-height: 1.6;
-  }
-  
-  /* Cards and grids */
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .card {
-    padding: 1.5rem;
-    min-height: auto;
-  }
-  
-  /* Modal improvements */
+  .container { width: min(100% - 1.5rem, var(--container)); }
+
+  .hero { min-height: 80vh; }
+  .hero .inner { padding: 2rem 1rem 1.5rem; gap: 1.5rem; }
+
+  .headline p { font-size: 1.125rem; line-height: 1.6; }
+
+  /* Cards & grids */
+  .grid { grid-template-columns: 1fr; gap: 1rem; }
+  .card { padding: 1.5rem; min-height: auto; }
+
+  /* Modal */
   .modal-content {
     margin: 1rem;
     max-height: 85vh;
@@ -75,111 +43,59 @@
   }
 }
 
-/* Mobile portrait and down */
+/* ≤640px (mobile portrait) */
 @media (max-width: 640px) {
-  .container {
-    width: min(100% - 1rem, var(--container));
+  .container { width: min(100% - 1rem, var(--container)); }
+
+  .skill-card { min-width: 280px; }
+
+  .headline p { font-size: 1.125rem; }
+
+  .headline-title {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
   }
-  
-  .skill-card { 
-    min-width: 280px; 
+
+  .headline-title img { width: 5.375rem; height: 5.375rem; }
+
+  .headline .tagline {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: clamp(0.75rem, 3.6vw, 1.125rem);
   }
-  
-  .headline p { 
-    font-size: 1.125rem; 
-  }
-  
-  .headline-title { 
-    flex-direction: column; 
-    align-items: center; 
-    gap: 0.5rem; 
-  }
-  
-  .headline-title img { 
-    width: 5.375rem; 
-    height: 5.375rem; 
-  }
-  
-  .headline .tagline { 
-    display: inline-block; 
-    white-space: nowrap; 
-    font-size: clamp(0.75rem, 3.6vw, 1.125rem); 
-  }
-  
-  .about h2, .about p { 
-    text-align: left; 
-    padding-left: 0.5rem; 
-  }
-  
-  .card { 
-    min-height: auto; 
-    padding: 1.25rem;
-  }
-  
-  /* Athletics page tweaks */
-  .hero-inner .about h1 { 
-    font-size: 2.125rem !important; 
-    line-height: 1.15; 
-  }
-  
-  .team-inner .about h2 { 
-    font-size: 1.75rem !important; 
-    line-height: 1.2; 
-  }
-  
+
+  .about h2, .about p { text-align: left; padding-left: 0.5rem; }
+
+  .card { min-height: auto; padding: 1.25rem; }
+
+  /* Athletics page micro-tweaks */
+  .hero-inner .about h1 { font-size: 2.125rem !important; line-height: 1.15; }
+  .team-inner .about h2 { font-size: 1.75rem !important; line-height: 1.2; }
+
   /* Small helpers */
-  .scroll-btn { 
-    width: 2.25rem; 
-    height: 2.25rem; 
-  }
-  
-  .scroll-wrap::before, 
-  .scroll-wrap::after { 
-    width: 1.75rem; 
-  }
+  .scroll-btn { width: 2.25rem; height: 2.25rem; }
+  .scroll-wrap::before,
+  .scroll-wrap::after { width: 1.75rem; }
 }
 
-/* Small mobile screens */
+/* ≤480px (small phones) */
 @media (max-width: 480px) {
-  .container {
-    width: min(100% - 0.75rem, var(--container));
-  }
-  
-  .hero .inner {
-    padding: 1.5rem 0.75rem 1rem;
-  }
-  
-  .headline h1 {
-    font-size: clamp(2rem, 8vw, 3rem);
-    margin-bottom: 0.5rem;
-  }
-  
-  .headline p {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .headline-title img {
-    width: 4.5rem;
-    height: 4.5rem;
-  }
-  
-  .card {
-    padding: 1rem;
-    border-radius: 0.75rem;
-  }
-  
-  .btn {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
-  }
-  
-  .btn-secondary {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.875rem;
-  }
-  
-  /* Modal for small screens */
+  .container { width: min(100% - 0.75rem, var(--container)); }
+
+  .hero .inner { padding: 1.5rem 0.75rem 1rem; }
+
+  .headline h1 { font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 0.5rem; }
+  .headline p  { font-size: 1rem; margin-bottom: 1rem; }
+
+  .headline-title img { width: 4.5rem; height: 4.5rem; }
+
+  .card { padding: 1rem; border-radius: 0.75rem; }
+
+  .btn { padding: 0.75rem 1.5rem; font-size: 0.9rem; }
+  .btn-secondary { padding: 0.625rem 1.25rem; font-size: 0.875rem; }
+
+  /* Modal (small screens) */
   .modal-content {
     margin: 0.5rem;
     padding: 1.5rem;
@@ -187,35 +103,16 @@
   }
 }
 
-/* Extra small screens */
+/* ≤360px (extra small) */
 @media (max-width: 360px) {
-  .container {
-    width: min(100% - 0.5rem, var(--container));
-  }
-  
-  .hero .inner {
-    padding: 1.25rem 0.5rem 0.75rem;
-  }
-  
-  .headline h1 {
-    font-size: clamp(1.75rem, 9vw, 2.5rem);
-  }
-  
-  .headline p {
-    font-size: 0.9rem;
-  }
-  
-  .headline-title img {
-    width: 4rem;
-    height: 4rem;
-  }
-  
-  .btn {
-    padding: 0.6875rem 1.25rem;
-    font-size: 0.875rem;
-  }
-  
-  .card {
-    padding: 0.875rem;
-  }
+  .container { width: min(100% - 0.5rem, var(--container)); }
+  .hero .inner { padding: 1.25rem 0.5rem 0.75rem; }
+
+  .headline h1 { font-size: clamp(1.75rem, 9vw, 2.5rem); }
+  .headline p  { font-size: 0.9rem; }
+
+  .headline-title img { width: 4rem; height: 4rem; }
+
+  .btn { padding: 0.6875rem 1.25rem; font-size: 0.875rem; }
+  .card { padding: 0.875rem; }
 }

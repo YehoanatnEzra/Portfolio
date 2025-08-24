@@ -1,9 +1,8 @@
-import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import Projects from './pages/Projects'
-import Athletic from './pages/Athletic'
-import Resume from './pages/Resume'
+import Home from '../pages/Home/Home'
+import Projects from '../pages/Projects/Projects'
+import Athletic from '../pages/Athletic/Athletic'
+import Resume from '../pages/Resume/Resume'
 
 export default function App(){
   return (

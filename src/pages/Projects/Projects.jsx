@@ -1,21 +1,9 @@
 // src/pages/Projects.jsx
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { GlowingEffect } from '../components/ui/GlowingEffect';
-import { LampHeader, LampTitle } from '../components/ui/LampHeader';
+import { GlowingEffect } from "../../components/ui/GlowingEffect/GlowingEffect";
+import { LampHeader, LampTitle } from "../../components/ui/LampEffect/LampHeader";
 
-/**
- * Projects page
- * ----------------------------------------------------
- * Displays a filterable gallery of project cards with:
- *  - Language / technology filters (multi-select)
- *  - Type filters (Academic, Personal, Hackathon)
- *  - Animated lamp header + glow effect
- *  - Modal for extended project details
- *
- * NOTE: Only formatting & documentation improvements applied.
- *       Business logic and data are unchanged intentionally.
- */
 
 /**
  * @typedef {Object} Project
@@ -69,41 +57,10 @@ const PROJECTS = [
 
             This module was developed as part of a larger group project (InternSheep), an AI-powered resume tailoring platform that customizes user resumes based on job descriptions.`
   },
-  {
-    title: 'Portfolio Website',
-    type: 'Personal',
-    tags: ['React', 'JavaScript', 'CSS'],
-    description: 'Personal portfolio website showcasing projects, athletic achievements, and professional experience built with React.',
-    code: 'https://github.com/YehoanatnEzra/Portfolio',
-    img: `${import.meta.env.BASE_URL}photos/projects/portfolio_web.jpg`,
-    details:`A modern, responsive portfolio website built from scratch to showcase my work and achievements.
-
-            Key Features:
-            - Responsive design optimized for desktop and mobile
-            - Interactive project showcase with filtering system
-            - Athletic achievements and running statistics
-            - Professional resume integration
-            - Background carousel with custom navigation
-            - Smooth animations and transitions
-            - Modern UI with gradient styling and glass effects
-
-            Technical Implementation:
-            - Built with React and modern JavaScript
-            - Modular CSS architecture for maintainability
-            - Custom components and reusable UI elements
-            - Responsive design with mobile-first approach
-            - Performance optimized with image preloading
-
-            This portfolio demonstrates proficiency in:
-            - Frontend development with React
-            - Responsive web design principles
-            - Modern CSS techniques and animations
-            - User experience and interface design
-            - Performance optimization strategies`
-  },
+  
   {
     title: 'Cancer Attributes Prediction',
-    type: 'Hackathon', // moved here
+    type: 'Hackathon', 
     tags: ['Python', 'ML', 'Data analysis'],
     description: 'Built a machine learning pipeline on EHR data (~60K patients) to predict cancer risk, metastasis, and patient subtypes with a multi-model approach. (Hackathon project)',
     code: 'https://github.com/YehoanatnEzra/Cancer_Attributes_Prediction',
@@ -138,6 +95,38 @@ const PROJECTS = [
             - Thread operations: spawn, sleep, block, resume, terminate.
             - Signal masking for race-free context switches.
             - Comprehensive stress tests simulating concurrent workloads.`
+  },
+  {
+    title: 'Portfolio Website',
+    type: 'Personal',
+    tags: ['React', 'JavaScript', 'CSS'],
+    description: 'Personal portfolio website showcasing projects, athletic achievements, and professional experience built with React.',
+    code: 'https://github.com/YehoanatnEzra/Portfolio',
+    img: `${import.meta.env.BASE_URL}photos/projects/portfolio_web.jpg`,
+    details:`A modern, responsive portfolio website built from scratch to showcase my work and achievements.
+
+            Key Features:
+            - Responsive design optimized for desktop and mobile
+            - Interactive project showcase with filtering system
+            - Athletic achievements and running statistics
+            - Professional resume integration
+            - Background carousel with custom navigation
+            - Smooth animations and transitions
+            - Modern UI with gradient styling and glass effects
+
+            Technical Implementation:
+            - Built with React and modern JavaScript
+            - Modular CSS architecture for maintainability
+            - Custom components and reusable UI elements
+            - Responsive design with mobile-first approach
+            - Performance optimized with image preloading
+
+            This portfolio demonstrates proficiency in:
+            - Frontend development with React
+            - Responsive web design principles
+            - Modern CSS techniques and animations
+            - User experience and interface design
+            - Performance optimization strategies`
   },
   {
     title: 'Research - Evolution of Color Naming Systems',
@@ -195,22 +184,7 @@ const PROJECTS = [
     img: `${import.meta.env.BASE_URL}photos/projects/whasapp.png`,
     details: 'still in progress...'
   },
-  {
-    title: 'System Monitor',
-    type: 'Personal',
-    tags: ['Python', 'Bash', 'Automation'],
-    description: 'Monitors CPU/memory/disk and auto-logs via a GitHub Actions (cron-like) workflow.',
-    code: 'https://github.com/YehoanatnEzra/System_Monitor',
-    img: `${import.meta.env.BASE_URL}photos/projects/system_monitor.png`,
-    details:`Mini project for system monitoring with Python and Bash, integrated into GitHub Actions.
-
-            Key Features:
-            - Resource tracking: CPU, memory, disk via psutil.
-            - Logs to CSV for analysis.
-            - Color-coded terminal UI.
-            - Bash wrapper for easy execution.
-            - Automated cron-like execution using GitHub Actions every 5 minutes.`
-  },
+ 
   {
     title: 'Nand2Tetris',
     type: 'Academic',
@@ -265,6 +239,22 @@ const PROJECTS = [
       - Application of design patterns in real projects
       - Hands-on experience with GUI/game libraries (DanoGameLab)`
 
+  },
+   {
+    title: 'System Monitor',
+    type: 'Personal',
+    tags: ['Python', 'Bash', 'Automation'],
+    description: 'Monitors CPU/memory/disk and auto-logs via a GitHub Actions (cron-like) workflow.',
+    code: 'https://github.com/YehoanatnEzra/System_Monitor',
+    img: `${import.meta.env.BASE_URL}photos/projects/system_monitor.png`,
+    details:`Mini project for system monitoring with Python and Bash, integrated into GitHub Actions.
+
+            Key Features:
+            - Resource tracking: CPU, memory, disk via psutil.
+            - Logs to CSV for analysis.
+            - Color-coded terminal UI.
+            - Bash wrapper for easy execution.
+            - Automated cron-like execution using GitHub Actions every 5 minutes.`
   }
 ];
 

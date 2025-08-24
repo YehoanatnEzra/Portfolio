@@ -1,6 +1,4 @@
-/* =========================================================
-   Projects page: toolbar, chips, grid, cards, modal
-   ========================================================= */
+
 
 /* Projects page header - narrower topbar */
 .projects-page header .nav {
@@ -286,6 +284,27 @@
   .filters--secondary {
     gap: 0.4rem;
   }
+
+  /* ---------- Card + thumbnail responsive fix ---------- */
+  /* מובייל: תמונה למעלה, טקסט מתחת (Stack) */
+  .card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    grid-template-columns: none;
+  }
+  .thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* יחס נעים לרוב התמונות */
+    min-height: 0;
+  }
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* מילוי בלי מתיחה */
+    object-position: center;
+  }
+  .content { width: 100%; }
 }
 
 @media (max-width: 480px) {
@@ -326,6 +345,9 @@
   .filters--secondary {
     gap: 0.35rem;
   }
+
+  /* Slightly shorter image on very small screens */
+  .thumb { aspect-ratio: 16 / 10; }
   
   /* Ensure chips don't get too small on very small screens */
   .chip--primary:hover,
@@ -535,6 +557,31 @@
 }
 .chip--type.is-hackathon.active {
    background: linear-gradient(135deg, #10b981, #34d399);
+}
+
+/* === FINAL MOBILE OVERRIDE (placed at end so it wins the cascade) === */
+@media (max-width: 768px){
+  .card{
+    display:flex !important;
+    flex-direction:column !important;
+    grid-template-columns: none !important;
+    min-height:0;
+  }
+  /* הצגת כל התמונה במובייל (פחות חיתוך) */
+  .thumb{
+  width:100%;
+  min-height:210px; /* קצת יותר גובה כך שהתמונה נראית גדולה/רחבה */
+  aspect-ratio:auto; /* מאפשר גמישות */
+  background:var(--panel);
+  display:block;
+  }
+  .thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover; /* ממלא לרוחב בלי פסים שחורים */
+  object-position:center; /* חיתוך מאוזן */
+  }
+  .content{width:100%;}
 }
 
 /* Badges by type */
