@@ -1,6 +1,4 @@
-/* =========================================================
-   Hero (Home)
-   ========================================================= */
+
 .hero{
   position: relative;
   min-height: 100vh;
@@ -79,25 +77,59 @@
 }
 
 .quick{
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 14px;
-  margin-bottom: 56px; /* add space before Technical Skills */
+  display:grid;
+  /* Narrower cards */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:18px;
+  margin-bottom:56px;
 }
 
 .qcard{
-  grid-column: span 4;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 16px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.3);
-  background: rgba(0,0,0,.25);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0,0,0,.2);
-  color: #fff;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding:18px 18px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.3);
+  background:rgba(0,0,0,.25);
+  backdrop-filter:blur(10px);
+  box-shadow:0 4px 18px rgba(0,0,0,.25);
+  color:#fff;
+  width:100%;
+  max-width:320px; /* limit width per card */
+  margin:0; /* left align */
+  min-height:210px; /* base height */
+}
+
+/* Larger resume variant */
+.qcard--resume{ min-height:250px; }
+
+/* Ensure inner content stretches so buttons align bottom */
+.qcard .card-inner{ display:flex; flex-direction:column; gap:12px; flex:1; }
+.qcard .row-between{ display:flex; gap:14px; align-items:flex-start; justify-content:space-between; flex:1; }
+.qcard .btn-group{ display:flex; gap:10px; }
+
+
+/* Two-line clamp for quick card descriptions */
+.quick .qcard p{
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  line-clamp:2; /* non-prefixed (future) */
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-height:2.8em; /* approx 2 lines */
+}
+
+/* Mobile: stack quick cards one per row */
+@media (max-width:740px){
+  .quick{ grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); justify-items:start; }
+  .qcard{ min-height:200px; }
+  .qcard--resume{ min-height:230px; }
+  .qcard .row-between{ flex-direction:column; align-items:flex-start; gap:10px; }
+  .qcard h3{ font-size:20px; }
+  .qcard .btn-group{ width:100%; display:flex; gap:10px; }
+  .qcard .btn-group a, .qcard .btn-group .pill{ flex:1; text-align:center; }
 }
 
 .qcard h3{ margin: 0; font-size: 18px; }
@@ -140,7 +172,7 @@
 }
 .scroll-wrap::-webkit-scrollbar { display: none; }
 
-/* Single background cycle button (Home) */
+/* Single background cycle button*/
 .bg-btn.bg-cycle {
   position: fixed;
   top: 96px; /* further below topbar on desktop */

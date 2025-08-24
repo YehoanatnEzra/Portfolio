@@ -2,12 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { GlowingEffect } from "../../components/ui/GlowingEffect/GlowingEffect";
 
-/**
- * Home page
- * - Keeps visuals identical
- * - Removes unused vars, inline style clutter
- * - Fixes footer JSX bug
- */
+
 export default function Home() {
   // Page title + force light theme
   useEffect(() => {
@@ -259,7 +254,7 @@ export default function Home() {
               <div className="card-inner">
                 <h3 className="h3-reset">My Athletic Journey</h3>
                 <div className="row-between">
-                  <p className="para-reset flex-1">My journey as a long distance runner and coach.</p>
+                  <p className="para-reset flex-1" title="My journey as a long distance runner and coach.">My journey as a long distance runner and coach.</p>
                   <div className="btn-group">
                     <Link to="/athletic" className="pill pill--ghost" aria-label="Explore Athletics" onClick={createClickGlow}>
                       Explore
@@ -275,7 +270,7 @@ export default function Home() {
               <div className="card-inner">
                 <h3 className="h3-reset">Explore my projects</h3>
                 <div className="row-between">
-                  <p className="para-reset flex-1">A collection of personal and academic projects.</p>
+                  <p className="para-reset flex-1" title="A collection of personal and academic projects.">A collection of personal and academic projects.</p>
                   <div className="btn-group">
                     <Link to="/projects" className="pill pill--ghost" aria-label="Explore Projects" onClick={createClickGlow}>
                       Explore
@@ -291,7 +286,7 @@ export default function Home() {
               <div className="card-inner">
                 <h3 className="h3-reset">My Resume</h3>
                 <div className="row-between">
-                  <p className="para-reset flex-1">Click to view my resume:</p>
+                  <p className="para-reset flex-1" title="Click to view my resume:">Click to view my resume:</p>
                   <div className="btn-group">
                     <Link to="/resume" className="pill pill--ghost" aria-label="Open résumé page" onClick={createClickGlow}>
                       Open
